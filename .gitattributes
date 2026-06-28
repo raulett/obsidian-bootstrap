@@ -38,3 +38,18 @@
 *.woff2 binary
 *.ttf   binary
 *.otf   binary
+
+# ── Свои скрипты (Python / TypeScript) ──
+# Исходники (.py/.ts/.js/.sh) уже получают LF от глобального правила выше.
+# Понятные заголовки hunk'ов в диффах Python:
+*.py diff=python
+# Windows-скрипты требуют CRLF, иначе ломается выполнение:
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+# Лок-файлы — генерируемые: не диффим и не учитываем в статистике языков.
+package-lock.json linguist-generated=true -diff
+pnpm-lock.yaml    linguist-generated=true -diff
+yarn.lock         linguist-generated=true -diff
+poetry.lock       linguist-generated=true -diff
+uv.lock           linguist-generated=true -diff

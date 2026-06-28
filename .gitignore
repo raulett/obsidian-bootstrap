@@ -23,6 +23,16 @@
 .smart-connections/
 copilot-index-*.json
 .obsidian/plugins/frontmatter-date-manager/hash-cache.json
+.makemd/
+.make/
+.obsidian/plugins/make-md/Spaces.mdb
+.obsidian/plugins/omnisearch/cache*
+
+# -----------------------------------------------------------------------------
+# Obsidian plugins — timestamped backup files (created by update-time-on-edit etc.)
+# Pattern: data_DEVICEID_DATE_N.json, vault-stats_DEVICEID_DATE_N.json
+# -----------------------------------------------------------------------------
+.obsidian/plugins/**/data_*_*.json
 
 # ── РЕКОМЕНДАЦИЯ: секреты в data.json ──
 # Некоторые плагины хранят в своём data.json секреты (API-ключи, токены,
@@ -73,3 +83,27 @@ $RECYCLE.BIN/
 *.swp
 *.swo
 *.tmp
+
+# ── Секреты окружения (общее для своих скриптов) ──
+.env
+.env.*
+!.env.example
+
+# ── Python (если пишешь свои скрипты для хранилища) ──
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# ── TypeScript / Node (если пишешь свои скрипты для хранилища) ──
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
