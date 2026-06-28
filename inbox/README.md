@@ -1,6 +1,8 @@
 ---
 created: 2026-06-29T01:07:44
 updated: 2026-06-29T01:32:53
+tags:
+  - example
 ---
 # inbox — входящие
 
