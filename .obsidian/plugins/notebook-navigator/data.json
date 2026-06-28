@@ -3,7 +3,7 @@
     {
       "id": "default",
       "name": "По умолчанию",
-      "fileVisibility": "supported",
+      "fileVisibility": "all",
       "propertyKeys": [],
       "hiddenFolders": [],
       "hiddenTags": [],
@@ -14,7 +14,7 @@
       "periodicNotesFolder": "",
       "shortcuts": [],
       "navRainbow": {
-        "mode": "none",
+        "mode": "foreground",
         "balanceHueLuminance": true,
         "separateThemeColors": false,
         "shortcuts": {
@@ -104,15 +104,15 @@
   "shiftEnterOpenContext": "tab",
   "cmdCtrlEnterOpenContext": "split",
   "mouseBackForwardAction": "history",
-  "startView": "files",
+  "startView": "navigation",
   "showInfoButtons": true,
   "homepage": {
-    "source": "none",
+    "source": "daily-note",
     "file": null,
     "createMissingPeriodicNote": true
   },
   "dualPane": true,
-  "dualPaneOrientation": "horizontal",
+  "dualPaneOrientation": "vertical",
   "narrowSidebarLayout": "singlePane",
   "narrowSidebarTriggerMode": "fitPanes",
   "narrowSidebarCustomWidth": 350,
@@ -485,7 +485,14 @@
   "folderBackgroundColors": {},
   "folderSortOverrides": {},
   "folderTreeSortOverrides": {},
-  "folderAppearances": {},
+  "folderAppearances": {
+    "inbox": {
+      "mode": "compact"
+    },
+    "/": {
+      "mode": "compact"
+    }
+  },
   "tagIcons": {},
   "tagColors": {},
   "tagBackgroundColors": {},
