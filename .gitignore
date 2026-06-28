@@ -4,6 +4,7 @@
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
 .obsidian/cache
+.obsidian/graph.json
 
 # Корзина Obsidian (core-плагин «Удалённые файлы»)
 .trash/
@@ -21,12 +22,12 @@
 # .smart-env — рекомендация самого Smart Connections (README).
 .smart-env/
 .smart-connections/
-copilot-index-*.json
 .obsidian/plugins/frontmatter-date-manager/hash-cache.json
 .makemd/
 .make/
 .obsidian/plugins/make-md/Spaces.mdb
 .obsidian/plugins/omnisearch/cache*
+copilot-index-*.json
 
 # -----------------------------------------------------------------------------
 # Obsidian plugins — timestamped backup files (created by update-time-on-edit etc.)
@@ -107,3 +108,12 @@ build/
 npm-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+# Временные файлы
+.tmp
+tmp
+*.log
+
+# Популярные скиллы AI
+.superpowers
+docs/superpowers
