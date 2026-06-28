@@ -1,0 +1,75 @@
+# ── Obsidian: летучее состояние UI и кэши (у каждого устройства своё) ──
+# workspace.json / -mobile.json — раскладка панелей и недавние файлы
+# .obsidian/cache — внутренний кэш Obsidian, пересоздаётся
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+
+# Корзина Obsidian (core-плагин «Удалённые файлы»)
+.trash/
+
+# Пересоздаваемые кэши и зависимости плагинов — не везём в шаблоне.
+# Код плагинов и их data.json НЕ игнорируем: они часть бутстрапа.
+# (Установленные плагины кэш в файлы не пишут — держат его в IndexedDB,
+#  так что эти правила — на будущее / для доустановленных плагинов.)
+.obsidian/plugins/*/cache/
+.obsidian/plugins/*/.cache/
+.obsidian/plugins/*/node_modules/
+
+# Данные плагинов ВНЕ data.json (эмбеддинги/индексы: device-specific,
+# тяжёлые, пересоздаются). Безвредно, если плагин не установлен.
+# .smart-env — рекомендация самого Smart Connections (README).
+.smart-env/
+.smart-connections/
+copilot-index-*.json
+.obsidian/plugins/frontmatter-date-manager/hash-cache.json
+
+# ── РЕКОМЕНДАЦИЯ: секреты в data.json ──
+# Некоторые плагины хранят в своём data.json секреты (API-ключи, токены,
+# приватные ключи) — например obsidian-local-rest-api. Такой data.json НЕ
+# должен попасть в общий шаблон. Игнорируй его точечно, по одному плагину:
+#   .obsidian/plugins/<имя-плагина>/data.json
+# Кандидаты на проверку: *-rest-api, copilot, smart-composer, text-generator,
+# readwise и любые AI-плагины с ключом.
+# Проверка перед раздачей (должна быть пустой):
+#   git grep -iE '"(api[_-]?key|token|secret|password|privateKey)"|PRIVATE KEY' -- ':.obsidian/plugins/**/data.json'
+
+# Личные инструкции для AI-агента (вне общего шаблона, не коммитятся)
+CLAUDE.local.md
+
+# ── macOS ──
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.DocumentRevisions-V100
+.fseventsd
+.TemporaryItems
+.VolumeIcon.icns
+
+# ── Windows ──
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+*.stackdump
+
+# ── Linux ──
+# .directory — метаданные Dolphin/KDE
+*~
+.directory
+.Trash-*
+.nfs*
+.fuse_hidden*
+
+# ── Редакторы / IDE (если правишь заметки во внешнем редакторе) ──
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp

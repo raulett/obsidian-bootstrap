@@ -1,0 +1,17 @@
+{
+  "readableLineLength": false,
+  "openBehavior": "",
+  "newFileLocation": "folder",
+  "newFileFolderPath": "inbox",
+  "attachmentFolderPath": "./_files",
+  "newLinkFormat": "absolute",
+  "alwaysUpdateLinks": true,
+  "useMarkdownLinks": true,
+  "showUnsupportedFiles": true,
+  "trashOption": "local",
+  "userIgnoreFilters": [
+    "_files/"
+  ],
+  "uriCallbacks": true,
+  "focusNewTab": true
+}
