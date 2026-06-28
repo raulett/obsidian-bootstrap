@@ -9,11 +9,11 @@
   "minSecondsBetweenSaves": 30,
   "delayForNewFiles": 5000,
   "postUpdateCommand": "",
-  "filterRules": "# Системные файлы\nREADME.md\nCLAUDE.md\n.claude/\ntemplates/\ntmp/\n",
+  "filterRules": "# Системные файлы\nREADME.md\nCLAUDE.md\nCLAUDE.local.md\nAGENTS.md\n.claude/\ntemplates/\ntmp/\n",
   "enableModifiedTime": true,
   "enableLastViewed": false,
   "headerLastViewed": "viewed",
-  "countUpdatesEnabled": true,
+  "countUpdatesEnabled": false,
   "headerUpdateCount": "updated_count",
   "enableContentHashCheck": true,
   "hashTrackingMode": "body",
@@ -21,5 +21,5 @@
   "enableAutoPopulateCache": true,
   "hashCacheMaxSize": 10000,
   "inversionFixStrategy": "disabled",
-  "inversionToleranceSec": 0
+  "inversionToleranceSec": 2
 }
