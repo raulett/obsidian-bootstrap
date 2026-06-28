@@ -287,7 +287,18 @@
   "foldersToIgnore": [
     ""
   ],
-  "filesToIgnore": [],
+  "filesToIgnore": [
+    {
+      "label": "CLAUDE.md",
+      "match": "CLAUDE.md",
+      "flags": "i"
+    },
+    {
+      "label": "SKILL.md",
+      "match": "SKILL.md",
+      "flags": "i"
+    }
+  ],
   "linterLocale": "ru",
   "logLevel": "ERROR",
   "lintCommands": [],

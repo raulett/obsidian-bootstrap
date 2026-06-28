@@ -5,14 +5,25 @@
       "name": "По умолчанию",
       "fileVisibility": "all",
       "propertyKeys": [],
-      "hiddenFolders": [],
+      "hiddenFolders": [
+        "_files"
+      ],
       "hiddenTags": [],
       "hiddenFileNames": [],
       "hiddenFileTags": [],
       "hiddenFileProperties": [],
       "navigationBanner": null,
       "periodicNotesFolder": "",
-      "shortcuts": [],
+      "shortcuts": [
+        {
+          "type": "note",
+          "path": "CLAUDE.md"
+        },
+        {
+          "type": "note",
+          "path": "Проверка типографии.md"
+        }
+      ],
       "navRainbow": {
         "mode": "foreground",
         "balanceHueLuminance": true,
@@ -93,7 +104,7 @@
     "featureImagePixelSize": "synced",
     "uiScale": "synced"
   },
-  "createNewNotesInNewTab": false,
+  "createNewNotesInNewTab": true,
   "autoRevealActiveFile": true,
   "autoRevealShortestPath": true,
   "autoRevealIgnoreRightSidebar": true,
@@ -109,7 +120,7 @@
   "homepage": {
     "source": "daily-note",
     "file": null,
-    "createMissingPeriodicNote": true
+    "createMissingPeriodicNote": false
   },
   "dualPane": true,
   "dualPaneOrientation": "vertical",
@@ -146,16 +157,23 @@
   "colorIconOnly": false,
   "dateFormat": "D MMM YYYY",
   "timeFormat": "HH:mm",
-  "calendarTemplateFolder": "",
+  "calendarTemplateFolder": "templates",
   "confirmBeforeDelete": true,
   "deleteAttachments": "ask",
   "moveFileConflicts": "ask",
-  "externalIconProviders": {},
+  "externalIconProviders": {
+    "bootstrap-icons": true,
+    "fontawesome-solid": true,
+    "material-icons": true,
+    "phosphor": true,
+    "rpg-awesome": true,
+    "simple-icons": true
+  },
   "checkForUpdatesOnStart": true,
   "pinNavigationBanner": true,
   "showNoteCount": true,
-  "separateNoteCounts": true,
-  "showIndentGuides": false,
+  "separateNoteCounts": false,
+  "showIndentGuides": true,
   "navCountLeaderStyle": "none",
   "rootLevelSpacing": 0,
   "navIndent": 16,
@@ -163,7 +181,7 @@
   "navItemHeightScaleText": true,
   "collapseBehavior": "all",
   "smartCollapse": true,
-  "collapseOtherBranchesOnExpand": true,
+  "collapseOtherBranchesOnExpand": false,
   "autoSelectFirstFileOnFocusChange": false,
   "autoExpandNavItems": true,
   "springLoadedFolders": true,
@@ -171,7 +189,7 @@
   "springLoadedFoldersSubsequentDelay": 0.5,
   "showSectionIcons": true,
   "showShortcuts": true,
-  "shortcutBadgeDisplay": "index",
+  "shortcutBadgeDisplay": "none",
   "skipAutoScroll": false,
   "showRecentNotes": true,
   "hideRecentNotes": "none",
@@ -179,7 +197,7 @@
   "recentNotesCount": 5,
   "showFolderIcons": true,
   "showRootFolder": true,
-  "inheritFolderColors": true,
+  "inheritFolderColors": false,
   "folderSortOrder": "alpha-asc",
   "enableFolderNotes": false,
   "folderNoteType": "markdown",
@@ -205,10 +223,10 @@
   "propertySortOrder": "alpha-asc",
   "showAllPropertiesFolder": true,
   "scopePropertiesToCurrentContext": false,
-  "defaultListMode": "standard",
+  "defaultListMode": "compact",
   "includeDescendantNotes": false,
   "defaultFolderSort": "modified-desc",
-  "propertySortKey": "",
+  "propertySortKey": "created, updated",
   "propertySortSecondary": "title",
   "manualSortPropertyKey": "sort_index",
   "manualSortGroupHeaderProperty": "group_header",
@@ -235,7 +253,7 @@
   "frontmatterIconField": "icon",
   "frontmatterColorField": "color",
   "frontmatterBackgroundField": "background",
-  "frontmatterNameField": "",
+  "frontmatterNameField": "title",
   "frontmatterCreatedField": "created",
   "frontmatterModifiedField": "updated",
   "frontmatterDateFormat": "YYYY-MM-DD[T]HH:mm:ss",
@@ -292,7 +310,7 @@
   "calendarEnabled": false,
   "calendarPlacement": "left-sidebar",
   "calendarConfirmBeforeCreate": true,
-  "calendarLocale": "system-default",
+  "calendarLocale": "ru",
   "calendarWeekendDays": "sat-sun",
   "calendarMonthHeadingFormat": "full",
   "calendarHighlightToday": true,
@@ -481,13 +499,20 @@
     "archive": "archive",
     "templates": "layout-template"
   },
-  "folderColors": {},
+  "folderColors": {
+    "/": "#3b82f6",
+    "archive": "#6b7280",
+    "templates": "#6b7280"
+  },
   "folderBackgroundColors": {},
-  "folderSortOverrides": {},
+  "folderSortOverrides": {
+    "/": "title-desc",
+    "inbox": "created-desc"
+  },
   "folderTreeSortOverrides": {},
   "folderAppearances": {
     "inbox": {
-      "mode": "compact"
+      "groupBy": "date"
     },
     "/": {
       "mode": "compact"
@@ -538,7 +563,8 @@
     "meetings",
     "archive",
     "templates",
-    "_files"
+    "_files",
+    "2026"
   ],
   "rootTagOrder": [],
   "rootPropertyOrder": []

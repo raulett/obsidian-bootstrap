@@ -6,7 +6,7 @@
   "enableAutoUpdate": true,
   "headerUpdated": "updated",
   "headerCreated": "created",
-  "minSecondsBetweenSaves": 30,
+  "minSecondsBetweenSaves": 10,
   "delayForNewFiles": 5000,
   "postUpdateCommand": "",
   "filterRules": "# Системные файлы\nREADME.md\nCLAUDE.md\nCLAUDE.local.md\nAGENTS.md\n.claude/\ntemplates/\ntmp/\n",

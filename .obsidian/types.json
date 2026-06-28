@@ -1,0 +1,17 @@
+{
+  "types": {
+    "tags": "tags",
+    "aliases": "aliases",
+    "created": "datetime",
+    "updated": "datetime",
+    "updated_count": "number",
+    "viewed": "datetime",
+    "date": "date",
+    "due": "date",
+    "status": "text",
+    "type": "text",
+    "title": "text",
+    "source": "text",
+    "url": "text"
+  }
+}
