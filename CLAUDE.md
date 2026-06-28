@@ -58,9 +58,21 @@
 - Core-плагины `bases` (`.base` — табличные/карточные представления) и `canvas` (`.canvas`) включены.
 - Активно: `omnisearch` (полнотекстовый поиск), `notebook-navigator`, `table-editor-obsidian`, `obsidian-heading-shifter`.
 
-## Как писать в базу
+## Репозитории внешних плагинов
 
-- **Файловые инструменты** (`Read` / `Write` / `Edit` / `Glob` / `Grep`) — основной и единственный канал: проще, быстрее, работают и при закрытом Obsidian.
+Понадобились детали поведения плагина или его настройки — **открой исходный код в репозитории, не угадывай и не реверси по сборке**. Маппинг `id → репозиторий` (id совпадает с папкой в `.obsidian/plugins/` и с ключами в `data.json`/настройках):
+
+- `better-markdown-links` — Better Markdown Links — https://github.com/mnaoumov/obsidian-better-markdown-links
+- `consistent-attachments-and-links` — Consistent Attachments and Links — https://github.com/dy-sh/obsidian-consistent-attachments-and-links
+- `data-files-editor` — Data Files Editor — https://github.com/ZukTol/obsidian-data-files-editor
+- `frontmatter-date-manager` — Frontmatter Date Manager — https://github.com/SmetDenis/obsidian-frontmatter-date-manager
+- `notebook-navigator` — Notebook Navigator — https://github.com/johansan/notebook-navigator
+- `obsidian-git` — Git — https://github.com/Vinzent03/obsidian-git
+- `obsidian-heading-shifter` — Heading Shifter — https://github.com/k4a-l/obsidian-heading-shifter
+- `obsidian-linter` — Linter — https://github.com/platers/obsidian-linter
+- `omnisearch` — Omnisearch — https://github.com/scambier/obsidian-omnisearch
+- `open-tab-settings` — Open Tab Settings — https://github.com/jesse-r-s-hines/obsidian-open-tab-settings
+- `table-editor-obsidian` — Advanced Tables — https://github.com/tgrosinger/advanced-tables-obsidian
 
 ## Скиллы (входят в шаблон, `.claude/skills/`)
 
