@@ -36,11 +36,11 @@
 
 ## Frontmatter и даты — не трогай руками
 
-Плагин `frontmatter-date-manager` сам ведёт поля **`created`**, **`updated`**, **`updated_count`** (формат `yyyy-MM-dd'T'HH:mm:ss`), пока Obsidian открыт.
+Плагин `frontmatter-date-manager` сам ведёт поля **`created`** и **`updated`** (формат `yyyy-MM-dd'T'HH:mm:ss`), пока Obsidian открыт.
 
-- **Не задавай и не правь `updated` / `updated_count`** — плагин перезапишет.
+- **Не задавай и не правь `updated`** — плагин перезапишет.
 - `created` плагин ставит при создании заметки в Obsidian. Если создаёшь файл через ФС при **закрытом** Obsidian и нужна дата сразу — можешь задать `created` сам в том же формате.
-- **Файлы-исключения (плагин их не трогает):** `README.md`, `CLAUDE.md`, и всё в `.claude/`, `templates/`, `tmp/`.
+- **Файлы-исключения (плагин их не трогает):** `README.md`, `CLAUDE.md`, `CLAUDE.local.md`, и всё в `.claude/`, `templates/`, `tmp/`.
 
 ## Редактирование: ожидай вмешательства Obsidian
 
@@ -54,7 +54,7 @@
 
 ## Плагины, влияющие на редактирование
 
-- `obsidian-linter` — установлен, но все правила сейчас отключены: автоформатирования при сохранении нет.
+- `obsidian-linter` — **активен**: форматирует `.md` при сохранении и при изменении файла на диске (`lintOnSave`/`lintOnFileChange`, локаль `ru`). Правила формата, под которые надо писать, — в `.claude/rules/markdown.md`. При **закрытом** Obsidian линтер не работает — формат держит сам Claude.
 - Core-плагины `bases` (`.base` — табличные/карточные представления) и `canvas` (`.canvas`) включены.
 - Активно: `omnisearch` (полнотекстовый поиск), `notebook-navigator`, `table-editor-obsidian`, `obsidian-heading-shifter`.
 
