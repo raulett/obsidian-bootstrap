@@ -4,64 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "957cdf3171e0e33b",
+        "id": "310201c8a066bc26",
         "type": "tabs",
         "children": [
           {
-            "id": "c76bbb8933c8f3c2",
+            "id": "8c49998f90bfcab9",
             "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Проверка типографии.md",
+                "file": "inbox/🔥 Quick Notes.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
+              "pinned": true,
               "icon": "lucide-file",
-              "title": "Проверка типографии"
-            }
-          },
-          {
-            "id": "6b045168b8822d6f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "README.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "README"
-            }
-          },
-          {
-            "id": "46a9f80c88e56df5",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "inbox/README.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "README"
-            }
-          },
-          {
-            "id": "b488bc27593a7504",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "knowledge/README.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "README"
+              "title": "🔥 Quick Notes"
             }
           }
         ]
@@ -172,7 +132,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Проверка типографии.md",
+                "file": "inbox/🔥 Quick Notes.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -215,7 +175,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Проверка типографии.md",
+                "file": "inbox/🔥 Quick Notes.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -246,19 +206,27 @@
       "notebook-navigator:Notebook Navigator": false
     }
   },
-  "active": "c76bbb8933c8f3c2",
+  "active": "8c49998f90bfcab9",
   "lastOpenFiles": [
+    "inbox/Поток мыслей.canvas",
+    "inbox/README.md",
+    "inbox/🔥 Quick Notes.md",
+    "dashboards/Разбор инбокса.base",
+    "dashboards/Активность.base",
+    "dashboards/softmus-subscribers.base",
+    "dashboards/softmus-monthly.base",
+    "dashboards/bookmarks.base",
+    "dashboards/books.base",
+    "dashboards",
     "Проверка типографии.md",
     "README.md",
     "knowledge/README.md",
-    "inbox/README.md",
     "meetings/README.md",
     "projects/README.md",
     "CLAUDE.md",
     "templates/README.md",
     "archive/README.md",
     "CLAUDE.local.md",
-    "inbox/Без названия.md",
     "templates/Заметка.md",
     "projects/Какой-то Проект/Заметка о проекте 1.md",
     "projects/Какой-то Проект",

@@ -118,8 +118,8 @@
   "startView": "navigation",
   "showInfoButtons": true,
   "homepage": {
-    "source": "daily-note",
-    "file": null,
+    "source": "file",
+    "file": "inbox/🔥 Quick Notes.md",
     "createMissingPeriodicNote": false
   },
   "dualPane": true,
@@ -309,7 +309,7 @@
   "parentFolderClickRevealsFile": false,
   "showParentFolderColor": false,
   "showParentFolderIcon": false,
-  "calendarEnabled": true,
+  "calendarEnabled": false,
   "calendarPlacement": "left-sidebar",
   "calendarConfirmBeforeCreate": true,
   "calendarLocale": "ru",
@@ -499,7 +499,8 @@
     "projects": "folder-kanban",
     "meetings": "users",
     "archive": "archive",
-    "templates": "layout-template"
+    "templates": "layout-template",
+    "dashboards": "material-icons:dashboard"
   },
   "folderColors": {
     "/": "#3b82f6",
@@ -509,7 +510,8 @@
   "folderBackgroundColors": {},
   "folderSortOverrides": {
     "/": "title-desc",
-    "inbox": "created-desc"
+    "inbox": "created-desc",
+    "dashboards": "title-desc"
   },
   "folderTreeSortOverrides": {},
   "folderAppearances": {
@@ -560,6 +562,7 @@
   "lastShownVersion": "3.2.0",
   "rootFolderOrder": [
     "inbox",
+    "dashboards",
     "knowledge",
     "projects",
     "meetings",

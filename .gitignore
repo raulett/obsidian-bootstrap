@@ -1,10 +1,10 @@
 # ── Obsidian: летучее состояние UI и кэши (у каждого устройства своё) ──
 # workspace.json / -mobile.json — раскладка панелей и недавние файлы
 # .obsidian/cache — внутренний кэш Obsidian, пересоздаётся
-.obsidian/workspace.json
+#.obsidian/graph.json
+#.obsidian/workspace.json
 .obsidian/workspace-mobile.json
 .obsidian/cache
-.obsidian/graph.json
 
 # Корзина Obsidian (core-плагин «Удалённые файлы»)
 .trash/
