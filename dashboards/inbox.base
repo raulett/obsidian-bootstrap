@@ -1,0 +1,60 @@
+filters:
+  and:
+    - file.inFolder("inbox")
+    - file.ext == "md"
+    - file.name != "_index"
+formulas:
+  note: if(title, file.asLink(title), file.asLink(file.name))
+  age: created.relative()
+  source_link: if(source, link(source, "Открыть"), "")
+  folder: file.folder.replace("inbox/", "")
+properties:
+  formula.note:
+    displayName: Заметка
+  formula.age:
+    displayName: Возраст
+  formula.source_link:
+    displayName: Источник
+  formula.folder:
+    displayName: Папка
+  created:
+    displayName: Создано
+views:
+  - type: table
+    name: Очередь
+    groupBy:
+      property: formula.age
+      direction: ASC
+    order:
+      - formula.folder
+      - formula.note
+      - formula.age
+      - formula.source_link
+    sort:
+      - property: created
+        direction: ASC
+    summaries:
+      formula.note: Filled
+    columnSize:
+      formula.note: 450
+      formula.age: 150
+      formula.source_link: 130
+      formula.folder: 120
+  - type: table
+    name: По папкам
+    groupBy:
+      property: formula.age
+      direction: ASC
+    order:
+      - formula.note
+      - formula.age
+      - formula.source_link
+    sort:
+      - property: created
+        direction: ASC
+    summaries:
+      formula.note: Count
+    columnSize:
+      formula.note: 450
+      formula.age: 150
+      formula.source_link: 130

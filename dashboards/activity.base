@@ -1,0 +1,82 @@
+filters:
+  and:
+    - not:
+        - file.inFolder("templates")
+    - not:
+        - file.inFolder("archive")
+    - file.ext == "md"
+    - file.name != "CLAUDE"
+formulas:
+  note: file.asLink(title)
+  note_type: file.tags.filter(value.startsWith("#type/")).map(value.replace("#type/", "")).join(", ")
+  viewed_fmt: viewed.format("dd, DD MMM HH:mm")
+  created_fmt: created.format("dd, DD MMM HH:mm")
+  updated_fmt: updated.format("dd, DD MMM HH:mm")
+  viewed_rel: viewed.relative()
+  created_rel: created.relative()
+  updated_rel: updated.relative()
+  folder: file.folder
+properties:
+  formula.note:
+    displayName: Название
+  formula.note_type:
+    displayName: Тип
+  formula.viewed_fmt:
+    displayName: Просмотрено
+  formula.created_fmt:
+    displayName: Создано
+  formula.updated_fmt:
+    displayName: Изменено
+  formula.viewed_rel:
+    displayName: Когда
+  formula.created_rel:
+    displayName: Когда
+  formula.updated_rel:
+    displayName: Когда
+  formula.folder:
+    displayName: Директория
+views:
+  - type: table
+    name: Новые за 30 дней
+    filters:
+      and:
+        - created >= today() - "1M"
+    order:
+      - formula.note
+      - formula.created_rel
+      - formula.created_fmt
+      - tags
+    sort:
+      - property: formula.created_rel
+        direction: ASC
+      - property: created
+        direction: DESC
+    limit: 100
+    summaries:
+      formula.note: Unique
+    columnSize:
+      formula.note: 400
+      formula.created_rel: 130
+      formula.created_fmt: 170
+  - type: table
+    name: Последние изменения за 30 дней
+    filters:
+      and:
+        - updated >= today() - "1M"
+    order:
+      - formula.note
+      - formula.updated_rel
+      - formula.updated_fmt
+      - tags
+    sort:
+      - property: formula.updated_rel
+        direction: ASC
+      - property: updated
+        direction: DESC
+    limit: 100
+    summaries:
+      formula.note: Unique
+    columnSize:
+      formula.note: 400
+      formula.updated_rel: 130
+      formula.updated_fmt: 170
