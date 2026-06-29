@@ -1,10 +1,17 @@
 {
   "mcpServers": {
     "obsidian": {
-      "type": "http",
-      "url": "http://127.0.0.1:27123/mcp/",
-      "headers": {
-        "Authorization": "Bearer qwerty"
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "obsidian-mcp-server@latest"
+      ],
+      "env": {
+        "MCP_TRANSPORT_TYPE": "stdio",
+        "MCP_LOG_LEVEL": "info",
+        "OBSIDIAN_API_KEY": "qwerty",
+        "OBSIDIAN_BASE_URL": "http://127.0.0.1:27123"
       }
     }
   }
