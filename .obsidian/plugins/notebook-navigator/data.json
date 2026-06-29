@@ -6,7 +6,8 @@
       "fileVisibility": "all",
       "propertyKeys": [],
       "hiddenFolders": [
-        "_files"
+        "_files",
+        "/tmp"
       ],
       "hiddenTags": [],
       "hiddenFileNames": [],
@@ -568,7 +569,8 @@
     "meetings",
     "archive",
     "templates",
-    "_files"
+    "_files",
+    "tmp"
   ],
   "rootTagOrder": [],
   "rootPropertyOrder": []
