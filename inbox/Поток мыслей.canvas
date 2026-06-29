@@ -1,0 +1,11 @@
+{
+	"nodes":[
+		{"id":"2a9332529a469743","x":-440,"y":-300,"width":250,"height":60,"type":"text","text":"Мысль 1"},
+		{"id":"bfd10485d93244b7","x":-440,"y":-60,"width":250,"height":60,"type":"text","text":"Мысль 2"},
+		{"id":"4a169f52ec861a93","x":-20,"y":-160,"width":250,"height":60,"type":"text","text":"Идея!"}
+	],
+	"edges":[
+		{"id":"71e8c241061749fb","fromNode":"2a9332529a469743","fromSide":"right","toNode":"4a169f52ec861a93","toSide":"left"},
+		{"id":"1abb7260426fd71d","fromNode":"bfd10485d93244b7","fromSide":"right","toNode":"4a169f52ec861a93","toSide":"left"}
+	]
+}
