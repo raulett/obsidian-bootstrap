@@ -13,15 +13,15 @@
       "hiddenFileTags": [],
       "hiddenFileProperties": [],
       "navigationBanner": null,
-      "periodicNotesFolder": "",
+      "periodicNotesFolder": "inbox",
       "shortcuts": [
         {
           "type": "note",
-          "path": "CLAUDE.md"
+          "path": "Проверка типографии.md"
         },
         {
           "type": "note",
-          "path": "Проверка типографии.md"
+          "path": "CLAUDE.md"
         }
       ],
       "navRainbow": {
@@ -123,8 +123,8 @@
     "createMissingPeriodicNote": false
   },
   "dualPane": true,
-  "dualPaneOrientation": "vertical",
-  "narrowSidebarLayout": "singlePane",
+  "dualPaneOrientation": "horizontal",
+  "narrowSidebarLayout": "vertical",
   "narrowSidebarTriggerMode": "fitPanes",
   "narrowSidebarCustomWidth": 350,
   "showTooltips": false,
@@ -193,7 +193,7 @@
   "skipAutoScroll": false,
   "showRecentNotes": true,
   "hideRecentNotes": "none",
-  "pinRecentNotesWithShortcuts": false,
+  "pinRecentNotesWithShortcuts": true,
   "recentNotesCount": 5,
   "showFolderIcons": true,
   "showRootFolder": true,
@@ -214,10 +214,10 @@
   "showAllTagsFolder": true,
   "showUntagged": true,
   "scopeTagsToCurrentContext": false,
-  "tagSortOrder": "alpha-asc",
+  "tagSortOrder": "frequency-desc",
   "inheritTagColors": true,
   "keepEmptyTagsProperty": false,
-  "showProperties": true,
+  "showProperties": false,
   "showPropertyIcons": true,
   "inheritPropertyColors": true,
   "propertySortOrder": "alpha-asc",
@@ -262,8 +262,10 @@
   "unfinishedTaskBackgroundColor": "#ef000050",
   "showFileIcons": true,
   "useFolderIconForFiles": false,
-  "showFilenameMatchIcons": false,
-  "fileNameIconMap": {},
+  "showFilenameMatchIcons": true,
+  "fileNameIconMap": {
+    "claude.md": "🛠️"
+  },
   "showCategoryIcons": false,
   "fileTypeIconMap": {},
   "fileNameRows": 1,
@@ -307,7 +309,7 @@
   "parentFolderClickRevealsFile": false,
   "showParentFolderColor": false,
   "showParentFolderIcon": false,
-  "calendarEnabled": false,
+  "calendarEnabled": true,
   "calendarPlacement": "left-sidebar",
   "calendarConfirmBeforeCreate": true,
   "calendarLocale": "ru",
@@ -323,10 +325,10 @@
   "calendarWeeksToShow": 1,
   "calendarIntegrationMode": "notebook-navigator",
   "calendarPeriodicNotesLocaleSource": "calendar",
-  "calendarCustomFilePattern": "YYYY/YYYYMMDD",
-  "calendarCustomWeekPattern": "gggg/[W]ww",
-  "calendarCustomMonthPattern": "YYYY/YYYYMM",
-  "calendarCustomQuarterPattern": "YYYY/[Q]Q",
+  "calendarCustomFilePattern": "YYYY-MM-DD",
+  "calendarCustomWeekPattern": "gggg-[W]ww",
+  "calendarCustomMonthPattern": "YYYY-MM",
+  "calendarCustomQuarterPattern": "YYYY-[Q]Q",
   "calendarCustomYearPattern": "YYYY",
   "calendarCustomFileTemplate": null,
   "calendarCustomWeekTemplate": null,
@@ -563,8 +565,7 @@
     "meetings",
     "archive",
     "templates",
-    "_files",
-    "2026"
+    "_files"
   ],
   "rootTagOrder": [],
   "rootPropertyOrder": []

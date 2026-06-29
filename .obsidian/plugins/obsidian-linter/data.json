@@ -284,9 +284,7 @@
   "displayLintOnFileChangeNotice": false,
   "settingsConvertedToConfigKeyValues": true,
   "additionalFileExtensions": [],
-  "foldersToIgnore": [
-    ""
-  ],
+  "foldersToIgnore": [],
   "filesToIgnore": [
     {
       "label": "CLAUDE.md",

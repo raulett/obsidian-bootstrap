@@ -15,7 +15,8 @@
               "state": {
                 "file": "Проверка типографии.md",
                 "mode": "source",
-                "source": false
+                "source": false,
+                "backlinks": false
               },
               "icon": "lucide-file",
               "title": "Проверка типографии"
@@ -136,7 +137,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 292.9811210632324
   },
   "right": {
     "id": "a15658fbc56d542c",
@@ -161,8 +162,8 @@
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
               },
-              "icon": "links-coming-in",
-              "title": "Обратные ссылки"
+              "icon": "lucide-ghost",
+              "title": "backlink"
             }
           },
           {
@@ -171,6 +172,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Проверка типографии.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -213,7 +215,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "projects/README.md",
+                "file": "Проверка типографии.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -223,11 +225,11 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 300,
+    "width": 316.298828125,
     "collapsed": true
   },
   "left-ribbon": {
@@ -246,8 +248,8 @@
   },
   "active": "c76bbb8933c8f3c2",
   "lastOpenFiles": [
-    "README.md",
     "Проверка типографии.md",
+    "README.md",
     "knowledge/README.md",
     "inbox/README.md",
     "meetings/README.md",
