@@ -97,7 +97,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 292.9811210632324
+    "width": 332.39191818237305
   },
   "right": {
     "id": "a15658fbc56d542c",
@@ -208,11 +208,14 @@
   },
   "active": "8c49998f90bfcab9",
   "lastOpenFiles": [
-    "inbox/Поток мыслей.canvas",
-    "inbox/README.md",
-    "inbox/🔥 Quick Notes.md",
     "dashboards/Разбор инбокса.base",
     "dashboards/Активность.base",
+    "knowledge/README.md",
+    "projects/Какой-то Проект/Заметка о проекте 1.md",
+    "templates/Заметка.md",
+    "inbox/🔥 Quick Notes.md",
+    "inbox/Поток мыслей.canvas",
+    "inbox/README.md",
     "dashboards/softmus-subscribers.base",
     "dashboards/softmus-monthly.base",
     "dashboards/bookmarks.base",
@@ -220,15 +223,12 @@
     "dashboards",
     "Проверка типографии.md",
     "README.md",
-    "knowledge/README.md",
     "meetings/README.md",
     "projects/README.md",
     "CLAUDE.md",
     "templates/README.md",
     "archive/README.md",
     "CLAUDE.local.md",
-    "templates/Заметка.md",
-    "projects/Какой-то Проект/Заметка о проекте 1.md",
     "projects/Какой-то Проект",
     "MarkdownTest.md",
     "Test.md",
