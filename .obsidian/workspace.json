@@ -23,6 +23,21 @@
               "icon": "lucide-file",
               "title": "🔥 Quick Notes"
             }
+          },
+          {
+            "id": "11ccaa3ea052b598",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "README"
+            }
           }
         ]
       }
@@ -206,23 +221,26 @@
       "notebook-navigator:Notebook Navigator": false
     }
   },
-  "active": "8c49998f90bfcab9",
+  "active": "f3fc39ad9aeacd30",
   "lastOpenFiles": [
+    "theme-preview.md",
+    "README.md.tmp.1869.595dad5b6a27",
+    "theme_test.md",
+    "README.md",
+    "inbox/README.md",
+    "inbox/🔥 Quick Notes.md",
     "dashboards/Разбор инбокса.base",
     "dashboards/Активность.base",
     "knowledge/README.md",
     "projects/Какой-то Проект/Заметка о проекте 1.md",
     "templates/Заметка.md",
-    "inbox/🔥 Quick Notes.md",
     "inbox/Поток мыслей.canvas",
-    "inbox/README.md",
     "dashboards/softmus-subscribers.base",
     "dashboards/softmus-monthly.base",
     "dashboards/bookmarks.base",
     "dashboards/books.base",
     "dashboards",
     "Проверка типографии.md",
-    "README.md",
     "meetings/README.md",
     "projects/README.md",
     "CLAUDE.md",
