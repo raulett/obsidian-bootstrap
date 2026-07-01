@@ -154,7 +154,7 @@ git push -u origin main
 | **Open Tab Settings**                | Управление открытием вкладок (новая вкладка по умолчанию, без дублей).                                                             |
 | **Data Files Editor**                | Редактирование `txt` / `json` / `yaml` / `xml` прямо в Obsidian.                                                                   |
 | **Linter**                           | Форматирование `.md` при сохранении и изменении файла на диске.                                                                    |
-| **Local REST API**                   | REST API к хранилищу; на нём работает MCP-сервер `obsidian` — канал релевантного поиска для AI (omnisearch), пока Obsidian открыт. |
+| **Local REST API**                   | REST API к хранилищу; на нём работает MCP-сервер `obsidian` - канал релевантного поиска для AI (omnisearch), пока Obsidian открыт. |
 
 ---
 
@@ -179,7 +179,7 @@ git push -u origin main
 ```
 Установи и запусти официальный скилл Codex migrate-to-codex ($skill-installer migrate-to-codex),
 чтобы перенести конфигурацию Claude Code этого репозитория - CLAUDE.md, CLAUDE.local.md,
-.claude/skills/ и .mcp.json - в нативные форматы Codex: AGENTS.md, .agents/skills/
+.claude/skills/ и .mcp.json (.mcp.json.template) - в нативные форматы Codex: AGENTS.md, .agents/skills/
 и .codex/config.toml. Исходные файлы Claude Code не трогай - хочу сохранить
 возможность вернуться к нему в будущем. Доведи миграцию до конца сам:
 scan → dry-run → запуск → правка блоков "MANUAL MIGRATION REQUIRED" → validate,
@@ -187,7 +187,7 @@ scan → dry-run → запуск → правка блоков "MANUAL MIGRATIO
 автоматически, что требует ручной проверки и что не имеет аналога в Codex.
 ```
 
-После миграции пробегитесь по отчёту: конвенции из `CLAUDE.md` должны без потерь смысла перейти в `AGENTS.md`, а MCP-сервер `obsidian` из `.mcp.json` - в `.codex/config.toml`.
+После миграции пробегитесь по отчёту: конвенции из `CLAUDE.md` должны без потерь смысла перейти в `AGENTS.md`, а MCP-серверы из `.mcp.json` - в `.codex/config.toml`.
 
 ### Claude Desktop (режим Code)
 
@@ -197,7 +197,48 @@ Claude Desktop (GUI-приложение) - не только чат. У при�
 
 Агент читает и пишет `.md` напрямую через файловые инструменты - проще, быстрее, работает и при закрытом Obsidian. Запущенный Obsidian мгновенно подхватывает изменения на диске, поэтому агент сверяется с актуальным состоянием файла перед правкой.
 
-Для **поиска** по базе агент использует MCP-сервер `obsidian` из [`.mcp.json`](</.mcp.json>) (omnisearch - релевантный полнотекстовый поиск, точнее grep). Сервер отвечает, только пока Obsidian открыт; при закрытом - поиск идёт через файловые инструменты. MCP здесь - дополнение к файловому доступу, а не замена: запись в базу по-прежнему идёт файлами.
+Для **поиска** по базе агент использует MCP-сервер `obsidian` (omnisearch - релевантный полнотекстовый поиск, точнее grep). Сервер отвечает, только пока Obsidian открыт; при закрытом - поиск идёт через файловые инструменты. MCP здесь - дополнение к файловому доступу, а не замена: запись в базу по-прежнему идёт файлами. Как поднять MCP-серверы (и подключить внешние, например Nextcloud) - в следующем разделе.
+
+### MCP-серверы: настройка
+
+MCP-серверы - дополнительный канал агента поверх файлов: релевантный поиск по базе и внешние интеграции. Их список задаётся в `.mcp.json`.
+
+> **Кажется сложным?** Не настраивайте вручную - откройте хранилище через AI и попросите: "настрой MCP-серверы по инструкции из README". Агент сам скопирует `.mcp.json.template`, задаст недостающие креды Nextcloud и пропишет их, задаст вам вопросы.
+
+**`.mcp.json` не версионируется** (в нём бывают личные креды), поэтому в шаблоне он поставляется заготовкой **`.mcp.json.template`**. Скопируйте её - без этого шага MCP-серверы не поднимутся:
+
+```bash
+cp .mcp.json.template .mcp.json
+```
+
+После копирования перезапустите Claude Code / Codex. В шаблоне предустановлены два сервера:
+
+- **`obsidian`** - релевантный поиск по базе (omnisearch) через плагин Local REST API. Работает из коробки: адрес и ключ уже прописаны (localhost), менять ничего не нужно.
+- **`nextcloud`** - доступ к вашему [Nextcloud](https://home.softmus.ru) (заметки, файлы, календарь, задачи, контакты и др.) через [cbcoutinho/nextcloud-mcp-server](https://github.com/cbcoutinho/nextcloud-mcp-server). До настройки стоит с плейсхолдерами и базе не мешает.
+
+**Подключение Nextcloud.** Понадобятся адрес инстанса, логин и **app-password** (в Nextcloud: **Settings → Security → Devices & sessions**, не основной пароль), а также установленный [`uv`](https://docs.astral.sh/uv/) (даёт команду `uvx`). Креды можно задать двумя способами - выбирайте, что удобнее.
+
+**Вариант 1 - переменные окружения** (безопаснее: секрет не попадает в файл). В `.mcp.json` значения подставляются из окружения через `${...}`.
+
+bash / zsh (Linux, macOS) - чтобы переменные сохранялись между сессиями, добавьте строки в `~/.bashrc` или `~/.zshrc`:
+
+```bash
+export NEXTCLOUD_HOST=https://home.softmus.ru
+export NEXTCLOUD_USERNAME=your_username
+export NEXTCLOUD_PASSWORD=your_app_password
+```
+
+Windows (PowerShell) - `setx` пишет переменные в профиль пользователя; они появятся в **новых** окнах терминала:
+
+```powershell
+setx NEXTCLOUD_HOST "https://home.softmus.ru"
+setx NEXTCLOUD_USERNAME "your_username"
+setx NEXTCLOUD_PASSWORD "your_app_password"
+```
+
+**Вариант 2 - вписать значения прямо в `.mcp.json`** вместо `${...}`: проще, файл неверсионный и в репозиторий не попадёт, но пароль хранится в нём открытым текстом.
+
+Если Nextcloud не нужен, удалите его блок из `.mcp.json.template` (и `.mcp.json`). Полный список инструментов и режим Docker - в [README сервера](https://github.com/cbcoutinho/nextcloud-mcp-server).
 
 ### Скиллы
 
