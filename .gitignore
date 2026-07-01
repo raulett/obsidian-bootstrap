@@ -46,8 +46,15 @@ copilot-index-*.json
 #   .obsidian/plugins/<имя-плагина>/data.json
 # Кандидаты на проверку: *-rest-api, copilot, smart-composer, text-generator,
 # readwise и любые AI-плагины с ключом.
-# Проверка перед раздачей (должна быть пустой):
-#   git grep -iE '"(api[_-]?key|token|secret|password|privateKey)"|PRIVATE KEY' -- ':.obsidian/plugins/**/data.json'
+#
+# ИСКЛЮЧЕНИЕ (осознанно): obsidian-local-rest-api/data.json В ЭТОМ шаблоне
+# намеренно НЕ игнорируется и коммитится — на нём MCP-сервер `obsidian`
+# работает «из коробки» (общий apiKey + включённый HTTP-порт). Хранилище
+# слушает только localhost, ключ "qwerty" и self-signed cert — не секрет,
+# а часть преднастройки. Это ожидаемо, не считать находкой безопасности.
+#
+# Проверка перед раздачей (кроме намеренного local-rest-api должна быть пустой):
+#   git grep -iE '"(api[_-]?key|token|secret|password|privateKey)"|PRIVATE KEY' -- ':.obsidian/plugins/**/data.json' ':!.obsidian/plugins/obsidian-local-rest-api/data.json'
 
 # Личные инструкции для AI-агента (вне общего шаблона, не коммитятся)
 CLAUDE.local.md

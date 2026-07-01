@@ -23,6 +23,8 @@ Save to file:
 defuddle parse <url> --md -o content.md
 ```
 
+Для ресёрча в этой базе готовую заметку клади в `inbox/` (конвенция хранилища), например `-o "inbox/Название заметки.md"`.
+
 Extract specific metadata:
 
 ```bash

@@ -12,7 +12,8 @@
         "MCP_LOG_LEVEL": "info",
         "OBSIDIAN_API_KEY": "qwerty",
         "OBSIDIAN_BASE_URL": "http://127.0.0.1:27123",
-        "OBSIDIAN_OMNISEARCH_URL": "http://localhost:51361"
+        "OBSIDIAN_OMNISEARCH_URL": "http://localhost:51361",
+        "OBSIDIAN_ENABLE_COMMANDS": "true"
       }
     }
   }

@@ -259,7 +259,7 @@ views:
 
 ### Map View
 
-Requires latitude/longitude properties and the Maps community plugin.
+Requires latitude/longitude properties. `list` and `map` are core Bases views since Obsidian 1.10 — no separate community plugin needed.
 
 ```yaml
 views:
@@ -415,13 +415,13 @@ views:
 
 ## Embedding Bases
 
-Embed in Markdown files:
+Embed in Markdown files. THIS vault uses Markdown embeds with an absolute path from the vault root (angle brackets + leading `/`), not `![[wikilink]]` embeds:
 
 ```markdown
-![[MyBase.base]]
+![](</Folder/MyBase.base>)
 
 <!-- Specific view -->
-![[MyBase.base#View Name]]
+![](</Folder/MyBase.base#View Name>)
 ```
 
 ## YAML Quoting Rules

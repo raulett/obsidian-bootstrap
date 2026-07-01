@@ -1,6 +1,6 @@
 {
   "version": "1.10.0",
-  "limitHeadingFrom": 6,
+  "limitHeadingFrom": 1,
   "overrideTab": true,
   "styleToRemove": {
     "beginning": {

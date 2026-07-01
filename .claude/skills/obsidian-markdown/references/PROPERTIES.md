@@ -30,8 +30,10 @@ due: 2024-02-01T14:30:00
 | Checkbox | `completed: true` |
 | Date | `date: 2024-01-15` |
 | Date & Time | `due: 2024-01-15T14:30:00` |
-| List | `tags: [one, two]` or YAML list |
-| Links | `related: "[[Other Note]]"` |
+| List | multiline YAML list (see below) |
+| Links | `related: "[Other Note](</Folder/Other Note.md>)"` |
+
+In THIS vault, list properties like `tags` and `aliases` are written as a multiline YAML list (one `-` item per line), not as an inline array `[a, b]` — a vault convention for clean diffs (the YAML-array linter rule is currently off, so keep this style yourself). Link properties use Markdown links with an absolute path from the vault root, in angle brackets with a leading `/` (e.g. `[Other Note](</Folder/Other Note.md>)`), not `[[wikilinks]]` (`useMarkdownLinks: true`, `newLinkFormat: absolute`).
 
 ## Default Properties
 

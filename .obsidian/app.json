@@ -10,7 +10,8 @@
   "showUnsupportedFiles": true,
   "trashOption": "local",
   "userIgnoreFilters": [
-    "_files/"
+    "_files/",
+    "tmp/"
   ],
   "uriCallbacks": true,
   "focusNewTab": true,

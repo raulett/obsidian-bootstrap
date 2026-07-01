@@ -11,21 +11,21 @@ Create and edit valid Obsidian Flavored Markdown. Obsidian extends CommonMark an
 
 1. **Add frontmatter** with properties (title, tags, aliases) at the top of the file. See [PROPERTIES.md](references/PROPERTIES.md) for all property types.
 2. **Write content** using standard Markdown for structure, plus Obsidian-specific syntax below.
-3. **Link related notes** using wikilinks (`[[Note]]`) for internal vault connections, or standard Markdown links for external URLs.
-4. **Embed content** from other notes, images, or PDFs using the `![[embed]]` syntax. See [EMBEDS.md](references/EMBEDS.md) for all embed types.
+3. **Link related notes** using standard Markdown links with an absolute path from the vault root, in angle brackets with a leading `/`: `[Text](</Folder/Note.md>)`. This vault uses Markdown links, not wikilinks (see below).
+4. **Embed content** from other notes, images, or PDFs using the Markdown embed syntax `![](</Folder/Note.md>)` (attachments live in `_files/`). See [EMBEDS.md](references/EMBEDS.md) for all embed types.
 5. **Add callouts** for highlighted information using `> [!type]` syntax. See [CALLOUTS.md](references/CALLOUTS.md) for all callout types.
 6. **Verify** the note renders correctly in Obsidian's reading view.
 
-> When choosing between wikilinks and Markdown links: use `[[wikilinks]]` for notes within the vault (Obsidian tracks renames automatically) and `[text](url)` for external URLs only.
+> Obsidian also supports `[[wikilinks]]`, but THIS vault uses Markdown links with absolute paths from the vault root, wrapped in angle brackets with a leading `/` — e.g. `[Text](</Folder/Note Name.md>)` (`useMarkdownLinks: true`, `newLinkFormat: absolute`, `better-markdown-links` defaults). Do NOT use wikilinks here; the link plugins normalize links to this angle-bracket form, so write it directly to avoid diff noise.
 
-## Internal Links (Wikilinks)
+## Internal Links
 
 ```markdown
-[[Note Name]]                          Link to note
-[[Note Name|Display Text]]             Custom display text
-[[Note Name#Heading]]                  Link to heading
-[[Note Name#^block-id]]                Link to block
-[[#Heading in same note]]              Same-note heading link
+[Note Name](</Folder/Note Name.md>)               Link to note
+[Display Text](</Folder/Note Name.md>)            Custom display text
+[Display Text](</Folder/Note Name.md#Heading>)    Link to heading
+[Display Text](</Folder/Note Name.md#^block-id>)  Link to block
+[Display Text](<#Heading in same note>)           Same-note heading link
 ```
 
 Define a block ID by appending `^block-id` to any paragraph:
@@ -44,14 +44,14 @@ For lists and quotes, place the block ID on a separate line after the block:
 
 ## Embeds
 
-Prefix any wikilink with `!` to embed its content inline:
+Prefix a Markdown link with `!` to embed its content inline (attachments live in `_files/`):
 
 ```markdown
-![[Note Name]]                         Embed full note
-![[Note Name#Heading]]                 Embed section
-![[image.png]]                         Embed image
-![[image.png|300]]                     Embed image with width
-![[document.pdf#page=3]]               Embed PDF page
+![](</Folder/Note Name.md>)               Embed full note
+![](</Folder/Note Name.md#Heading>)       Embed section
+![](</_files/image.png>)                  Embed image
+![|300](</_files/image.png>)              Embed image with width (width in alt text)
+![](</_files/document.pdf#page=3>)        Embed PDF page
 ```
 
 See [EMBEDS.md](references/EMBEDS.md) for audio, video, search embeds, and external images.
@@ -166,7 +166,7 @@ status: in-progress
 
 # Project Alpha
 
-This project aims to [[improve workflow]] using modern techniques.
+This project aims to [improve workflow](</knowledge/Improve Workflow.md>) using modern techniques.
 
 > [!important] Key Deadline
 > The first milestone is due on ==January 30th==.
@@ -180,11 +180,11 @@ This project aims to [[improve workflow]] using modern techniques.
 
 ## Notes
 
-The algorithm uses $O(n \log n)$ sorting. See [[Algorithm Notes#Sorting]] for details.
+The algorithm uses $O(n \log n)$ sorting. See [Algorithm Notes](</knowledge/Algorithm Notes.md#Sorting>) for details.
 
-![[Architecture Diagram.png|600]]
+![|600](</_files/Architecture Diagram.png>)
 
-Reviewed in [[Meeting Notes 2024-01-10#Decisions]].
+Reviewed in [Meeting Notes 2024-01-10](</meetings/Meeting Notes 2024-01-10.md#Decisions>).
 ````
 
 ## References
