@@ -25,7 +25,7 @@
             }
           },
           {
-            "id": "11ccaa3ea052b598",
+            "id": "a772aece75e76489",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -54,8 +54,7 @@
               "title": "theme-preview"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -206,7 +205,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md",
+                "file": "inbox/🔥 Quick Notes.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -236,7 +235,6 @@
       "notebook-navigator:Notebook Navigator": false
     }
   },
-  "active": "11ccaa3ea052b598",
-  "lastOpenFiles": [
-  ]
+  "active": "8c49998f90bfcab9",
+  "lastOpenFiles": []
 }

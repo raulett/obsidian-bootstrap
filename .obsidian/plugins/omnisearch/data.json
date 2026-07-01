@@ -35,7 +35,7 @@
   "weightCustomProperties": [],
   "httpApiEnabled": true,
   "httpApiPort": "51361",
-  "httpApiNotice": true,
+  "httpApiNotice": false,
   "welcomeMessage": "1.21.0",
   "verboseLogging": false,
   "DANGER_httpHost": null,
