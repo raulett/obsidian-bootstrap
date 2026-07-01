@@ -30,6 +30,17 @@
         "NEXTCLOUD_USERNAME": "${NEXTCLOUD_USERNAME:-your_username}",
         "NEXTCLOUD_PASSWORD": "${NEXTCLOUD_PASSWORD:-your_app_password}"
       }
+    },
+    "outline": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "mcp-outline"
+      ],
+      "env": {
+        "OUTLINE_API_KEY": "${OUTLINE_API_KEY:-your_api_key}",
+        "OUTLINE_API_URL": "${OUTLINE_API_URL:-https://docs.softmus.ru/api}"
+      }
     }
   }
 }
