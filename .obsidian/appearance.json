@@ -4,5 +4,7 @@
   "theme": "system",
   "baseFontSizeAction": true,
   "translucency": true,
-  "nativeMenus": false
+  "nativeMenus": false,
+  "showViewHeader": true,
+  "showRibbon": true
 }

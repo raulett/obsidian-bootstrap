@@ -15,5 +15,6 @@
   ],
   "uriCallbacks": true,
   "focusNewTab": true,
-  "spellcheck": false
+  "spellcheck": false,
+  "showInlineTitle": true
 }

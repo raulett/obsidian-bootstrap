@@ -3,11 +3,12 @@ tags:
   - example
   - test
 created: 2026-06-29T02:53:09
-updated: 2026-06-29T10:38:32
+updated: 2026-07-01T12:54:39
+title: Превью темы оформления
 ---
 > [!info]
 > Этот файл рекомендуется использовать для тестирования тем Obsidian
-# Header 1
+# Заголовок 1
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum scelerisque tincidunt lacus, vel dapibus lorem faucibus id. Nulla facilisi. Morbi tincidunt sapien nec erat consequat, ut cursus justo congue.
 
@@ -16,66 +17,66 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum scelerisque 
 
 Выделение текста как ==хайлайт== помогает обратить внимание на ключевые фрагменты. ***Жирный курсив*** может использоваться для особо важного акцента. `Код` обычно выделяется с помощью моноширинного шрифта, что делает его легко различимым. Для добавления внешних ресурсов используем [ссылку](https://example.com) или ссылку как есть <https://example.com>. Хештеги, такие как #пример, часто используются для классификации или поиска контента. В математических текстах инлайн формула, например, $E = mc^2$, может быть использована для представления научных данных.
 
-## Header 2 - **bold**, *italic*, ***bold-italic***
+## Заголовок 2 - **жирный**, *курсив*, ***жирный курсив***
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum scelerisque tincidunt lacus, vel dapibus lorem faucibus id. Nulla facilisi. Morbi tincidunt sapien nec erat consequat, ut cursus justo congue.
 
-### Header 3
+### Заголовок 3
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum scelerisque tincidunt lacus, vel dapibus lorem faucibus id. Nulla facilisi. Morbi tincidunt sapien nec erat consequat, ut cursus justo congue.
 
-#### Header 4
+#### Заголовок 4
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum scelerisque tincidunt lacus, vel dapibus lorem faucibus id. Nulla facilisi. Morbi tincidunt sapien nec erat consequat, ut cursus justo congue.
 
-##### Header 5
+##### Заголовок 5
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum scelerisque tincidunt lacus, vel dapibus lorem faucibus id. Nulla facilisi. Morbi tincidunt sapien nec erat consequat, ut cursus justo congue.
 
-###### Header 6
+###### Заголовок 6
 
-***Bold+Italic as tiny title***
+***Жирный курсив как маленький заголовок***
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum scelerisque tincidunt lacus, vel dapibus lorem faucibus id. Nulla facilisi. Morbi tincidunt sapien nec erat consequat, ut cursus justo congue.
 
-**Bold as tiny title**
+**Жирный как маленький заголовок**
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum scelerisque tincidunt lacus, vel dapibus lorem faucibus id. Nulla facilisi. Morbi tincidunt sapien nec erat consequat, ut cursus justo congue.
 
-# Basic formatting syntax
+# Базовый синтаксис форматирования
 
 Aliquam commodo, erat id rutrum interdum, dui ligula blandit massa, quis scelerisque magna quam at arcu. `Mauris pharetra` sit amet leo quis vestibulum. Morbi commodo, est non porta faucibus, justo nulla sagittis elit, vitae **ullamcorper** metus sem nec sem. Nam tempor, nunc non **consectetur** ornare, justo quam bibendum ex, id vestibulum velit felis vel ligula.
 
 ## Инлайн стили текста
 
-- Базаовые стили
+- Базовые стили
     - **Жирный текст**
     - *Курсивный текст*
     - ***Жирный и курсивный текст***
-    - **Bold text and *nested italic* text**
-    - *Italic text and **nested bold** text*
+    - **Жирный текст со *вложенным курсивом***
+    - *Курсив со **вложенным жирным***
     - ~~Зачеркнутый текст~~
 - Хитрое
     - ""Двойные кавычки"" - `"`
-    - ''Двойные кавычки'' - `'`
-    - \*\*This line will not be bold\*\*
-    - \**This line will be italic and show the asterisks*\*
+    - ''Одинарные кавычки'' - `'`
+    - \*\*Эта строка не станет жирной\*\*
+    - \**Эта строка будет курсивной и покажет звёздочки*\*
 - Это комментарий %%комментария%% в тексте
 - ==Выделение (highlight)==
 - Какой-то `code ->!= <= =>` среди текста
 - Формула $E = mc^2$
-- Superscript: yyy<sup>text</sup> or $x^2$ (в Obsidian это может работать не во всех темах)
-- Subscript: CO<sub>2</sub> or $x_1$ (также специфично для некоторых тем)
+- Надстрочный: yyy<sup>текст</sup> или $x^2$ (в Obsidian это может работать не во всех темах)
+- Подстрочный: CO<sub>2</sub> или $x_1$ (также специфично для некоторых тем)
 - <https://google.com>
 - [Внешняя ссылка тегом](https://google.com)
-- [Obsidian Note](obsidian://open?vault=MainVault&file=Note.md)
+- [Заметка Obsidian](obsidian://open?vault=MainVault&file=Note.md)
 - #hashtag
 - Ссылка на внутренний документ [README](</README.md>)
-- Footnotes
+- Сноски
 
 ```
-    - This is a simple footnote.[^1]
+    - Это простая сноска.[^1]
 ```
 
-    - This is a simple footnote.[^2]
+    - Это простая сноска.[^2]
 
 ## Спойлеры (плагин `blindfold`)
 
@@ -87,39 +88,42 @@ Aliquam commodo, erat id rutrum interdum, dui ligula blandit massa, quis sceleri
 - Список
 ```
 
-## Картинки + Embedings
+## Картинки и встраивания
 
-1. You can add images with external URLs, by adding a `!` symbol before an [external link](https://help.obsidian.md/Editing+and+formatting/Basic+formatting+syntax#External%20links).
-![Engelbart](_files/sample.png)
+1. Картинки можно добавлять по внешним URL, поставив символ `!` перед [внешней ссылкой](https://help.obsidian.md/Editing+and+formatting/Basic+formatting+syntax#External%20links).
+![Engelbart](</_files/example.jpg>)
 
-2. You can change the image dimensions, by adding `|640x480` or `|100` to the link destination, where 640 is the width and 480 is the height.![Engelbart|100](_files/sample.png)
-3. YouTube video
+2. Размеры картинки можно менять, добавив `|640x480` или `|100` к адресу ссылки, где 640 — ширина, а 480 — высота.![Engelbart|100](</_files/example.jpg>)
+
+3. Видео с YouTube
 
 ```
 ![](https://www.youtube.com/watch?v=NnTvZWp5Q7o)
 ```
 
-## Quotes, цитаты
+![](https://www.youtube.com/watch?v=NnTvZWp5Q7o)
+
+## Цитаты
 
 Простая:
 
-> Human beings face ever more complex and urgent problems, and their effectiveness in dealing with these problems is a matter that is critical to the stability and continued progress of society.
+> Люди сталкиваются со всё более сложными и неотложными проблемами, и их способность справляться с этими проблемами критически важна для стабильности и дальнейшего развития общества.
 
 Сложная:
 
 > [!quote]
-> *Human beings face ever more complex and urgent problems, and their effectiveness in dealing with these problems is a matter that is critical to the stability and continued progress of society.*
-> - Doug Engelbart, 1961
+> *Люди сталкиваются со всё более сложными и неотложными проблемами, и их способность справляться с этими проблемами критически важна для стабильности и дальнейшего развития общества.*
+> - Дуг Энгельбарт, 1961
 
 ## Списки
 
-### Lists
+### Нумерованные списки
 
 1. Первый элемент нумерованного списка
 2. Второй элемент нумерованного списка
 3. Вложенный элемент
 
-### Task List
+### Список задач
 
 #### Базовые возможности
 
@@ -137,51 +141,50 @@ Aliquam commodo, erat id rutrum interdum, dui ligula blandit massa, quis sceleri
     - [x] Вложенная подзадача 2
     - [ ] Вложенная подзадача 3
 
-#### Basic checklists
+#### Базовые чек-листы
 
-- [ ] normal
-- [/] / - incomplete
-- [x] x - done
-- [-] - canceled
-- [s] s - forwarded
-- [<] < - scheduling
+- [ ] обычная
+- [/] / - в процессе
+- [x] x - выполнена
+- [-] - отменена
+- [s] s - перенаправлена
+- [<] < - запланирована
 
-#### Extras checklists *(optional)*
+#### Дополнительные чек-листы *(опционально)*
 
-- [?] ? - question
-- [!] ! - exclamation
-- [*] * - star
-- ["] " - quote
-- [l] l - location
-- [b] b - bookmark
-- [i] i - information
-- [S] S - savings
-- [I] I - idea
-- [p] p - thumbs up
-- [c] c - thumbs down
-- [f] f - fire
-- [k] k - key
-- [w] w - win
-- [u] u - up
-- [d] d - down
+- [?] ? - вопрос
+- [!] ! - восклицание
+- [*] * - звезда
+- ["] " - цитата
+- [l] l - местоположение
+- [b] b - закладка
+- [i] i - информация
+- [S] S - сбережения
+- [I] I - идея
+- [p] p - палец вверх
+- [c] c - палец вниз
+- [f] f - огонь
+- [k] k - ключ
+- [w] w - победа
+- [u] u - вверх
+- [d] d - вниз
 
-### Nesting lists
+### Вложенные списки
 
-1. First list item
-2. Second sub item
-3. Ordered nested list item
-4. Second list item
-
-- Unordered nested list item
-- Another one
+1. Первый элемент списка
+    1. Второй подпункт
+    2. Вложенный нумерованный элемент
+2. Второй элемент списка
+    - Вложенный элемент маркированного списка
+    - Ещё один
 
 ## Пример кода (Python)
 
-Text inside `backticks` on a line will be formatted like code.
+Текст в `обратных кавычках` на строке будет отформатирован как код.
 
 ```python
 def fibonacci(n):
-    """Return the n-th Fibonacci number."""
+    """Вернуть n-е число Фибоначчи."""
     if n <= 1:
         return n
     return fibonacci(n - 1) + fibonacci(n - 2)
@@ -190,21 +193,21 @@ def fibonacci(n):
 print(fibonacci(10))
 ```
 
-## Comments
+## Комментарии
 
-You can add comments by wrapping text with `%%`. Comments are only visible in Editing view.
+Комментарии добавляются оборачиванием текста в `%%`. Комментарии видны только в режиме редактирования.
 
-This is an %%inline%% comment.
+Это %%строчный%% комментарий.
 
-%% This is a block comment.
+%% Это блочный комментарий.
 
-Block comments can span multiple lines. %%
+Блочные комментарии могут занимать несколько строк. %%
 
 ---
 
-# Advanced formatting syntax
+# Расширенный синтаксис форматирования
 
-## Simple table
+## Простая таблица
 
 | ID | Название | Описание                  | Количество | Цена  |
 |----|----------|---------------------------|-----------:|-------|
@@ -214,31 +217,31 @@ Block comments can span multiple lines. %%
 | 4  | Товар D  | Краткое описание товара D |          7 | 12.30 |
 | 5  | Товар E  | Краткое описание товара E |          3 | 50.00 |
 
-## Vertical bars in tables
+## Вертикальные разделители в таблицах
 
-| First column | Second column |
-|--------------|---------------|
-| **Bold**     | Text          |
+| Первый столбец | Второй столбец |
+|----------------|----------------|
+| **Жирный**     | Текст          |
 
-Align text in columns by adding colons (`:`) to the header row. You can also align content in *Live Preview* via the context menu.
+Выравнивание в столбцах задаётся двоеточиями (`:`) в строке заголовка. Также можно выравнивать содержимое в *Live Preview* через контекстное меню.
 
- Left-aligned text | Center-aligned text | Right-aligned text
-:------------------|:-------------------:|-------------------:
- Content           |       Content       |            Content
+ Текст по левому краю | Текст по центру | Текст по правому краю
+:---------------------|:---------------:|---------------------:
+ Содержимое           |    Содержимое   |            Содержимое
 
-## Diagrams (Mermaid JS)
+## Диаграммы (Mermaid JS)
 
-### Sequence
+### Диаграмма последовательности
 
 ```mermaid
 sequenceDiagram
-    Alice ->>+ John: Hello John, how are you?
-    Alice ->>+ John: John, can you hear me?
-    John -->>- Alice: Hi Alice, I can hear you!
-    John -->>- Alice: I feel great!
+    Alice ->>+ John: Привет, John, как дела?
+    Alice ->>+ John: John, ты меня слышишь?
+    John -->>- Alice: Привет, Alice, я тебя слышу!
+    John -->>- Alice: Отлично себя чувствую!
 ```
 
-### Flowchart
+### Блок-схема
 
 ```mermaid
 flowchart TD
@@ -249,7 +252,7 @@ flowchart TD
     D --> E
 ```
 
-### Gantt Chart
+### Диаграмма Ганта
 
 ```mermaid
 gantt
@@ -261,7 +264,7 @@ gantt
 
 ## Формулы
 
-### Пример inline формулы
+### Пример строчной формулы
 
 Эйнштейновская формула: $E = mc^2$, где $E$ - энергия, $m$ - масса, $c$ - скорость света.
 
@@ -276,66 +279,66 @@ $$
 - $F(x)$ - первообразная функции $f(x)$.
 - $a$ и $b$ - пределы интегрирования.
 
-## Callouts
+## Коллауты
 
 > [!info]
-> Here's a callout block.
-> It supports **Markdown**, [Wikilinks](</README.md>), and [embeds](</CLAUDE.md>)!
+> Вот блок коллаута.
+> Он поддерживает **Markdown**, [ссылки](</README.md>) и [встраивания](</CLAUDE.md>)!
 > ![pngegg](_files/sample.png)
 
-> [!tip] Callouts can have custom titles
-> Like this one.
+> [!tip] У коллаутов могут быть свои заголовки
+> Как этот.
 
-> [!tip] Title-only callout
+> [!tip] Коллаут только с заголовком
 
-> [!faq]- Are callouts foldable?
-> Yes! In a foldable callout, the contents are hidden when the callout is collapsed.
+> [!faq]- Коллауты сворачиваются?
+> Да! В сворачиваемом коллауте содержимое скрыто, когда коллаут свёрнут.
 
-> [!question] Can callouts be nested?
+> [!question] Можно ли вкладывать коллауты?
 >
-> > [!todo] Yes!, they can.
+> > [!todo] Да, можно.
 > >
-> > > [!example] You can even use multiple layers of nesting.
+> > > [!example] Можно даже использовать несколько уровней вложенности.
 
-### Customizations
+### Разновидности
 
 > [!abstract]
-> Aliases: `abstract`, `summary`, `tldr`
+> Псевдонимы: `abstract`, `summary`, `tldr`
 
 > [!info]
-> Text
+> Текст
 
 > [!todo]
-> Text
+> Текст
 
 > [!tip]
-> Aliases: `tip`, `hint`, `important`
+> Псевдонимы: `tip`, `hint`, `important`
 
 > [!success]
-> Aliases: `success`, `check`, `done`
+> Псевдонимы: `success`, `check`, `done`
 
 > [!question]
-> Aliases: `question`, `help`, `faq`
+> Псевдонимы: `question`, `help`, `faq`
 
 > [!warning]
-> Aliases: `warning`, `caution`, `attention`
+> Псевдонимы: `warning`, `caution`, `attention`
 
 > [!failure]
-> Aliases: `failure`, `fail`, `missing`
+> Псевдонимы: `failure`, `fail`, `missing`
 
 > [!danger]
-> Aliases: `danger`, `error`
+> Псевдонимы: `danger`, `error`
 
 > [!bug]
-> Text
+> Текст
 
 > [!example]
-> Text
+> Текст
 
 > [!quote]
-> Aliases: `quote`, `cite`
+> Псевдонимы: `quote`, `cite`
 
-## ***Footnotes***
+## ***Сноски***
 
-[^1]: This is the referenced text.
-[^2]: Add 2 spaces at the start of each new line. This lets you write footnotes that span multiple lines.
+[^1]: Текст, на который ведёт сноска.
+[^2]: Добавьте 2 пробела в начале каждой новой строки. Это позволяет писать сноски в несколько строк.
