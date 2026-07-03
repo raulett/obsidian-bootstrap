@@ -54,7 +54,8 @@
               "title": "theme-preview"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -205,7 +206,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "inbox/🔥 Quick Notes.md",
+                "file": "README.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -235,6 +236,10 @@
       "notebook-navigator:Notebook Navigator": false
     }
   },
-  "active": "8c49998f90bfcab9",
-  "lastOpenFiles": []
+  "active": "a772aece75e76489",
+  "lastOpenFiles": [
+    "inbox/🔥 Quick Notes.md",
+    "theme-preview.md",
+    "README.md"
+  ]
 }
