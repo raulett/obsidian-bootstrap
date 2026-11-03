@@ -1,8 +1,6 @@
 {
   "enabledMcpjsonServers": [
-    "obsidian",
-    "nextcloud",
-    "outline"
+    "obsidian"
   ],
   "permissions": {
     "deny": [

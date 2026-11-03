@@ -57,8 +57,8 @@ copilot-index-*.json
 #   git grep -iE '"(api[_-]?key|token|secret|password|privateKey)"|PRIVATE KEY' -- ':.obsidian/plugins/**/data.json' ':!.obsidian/plugins/obsidian-local-rest-api/data.json'
 
 # ── MCP-конфиг для AI-агента: личные креды подключения ──
-# .mcp.json может содержать креды сторонних MCP-серверов (например, Nextcloud:
-# host / логин / app-password), поэтому НЕ версионируется. В git едет только
+# .mcp.json может содержать креды сторонних MCP-серверов (адреса, логины,
+# API-ключи), поэтому НЕ версионируется. В git едет только
 # шаблон .mcp.json.template — скопируй его в .mcp.json и подставь свои значения.
 # Настройка описана в README, раздел «Работа с AI-агентом».
 .mcp.json
