@@ -3,5 +3,10 @@
     "obsidian",
     "nextcloud",
     "outline"
-  ]
+  ],
+  "permissions": {
+    "deny": [
+      "Read(/.trash/**)"
+    ]
+  }
 }
