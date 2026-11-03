@@ -815,7 +815,11 @@ var require_parse = __commonJS({
         }
       }
     };
-    var getStarExtglobSequenceOutput = (pattern) => {
+    var buildCharClassStar = (chars) => {
+      const source = chars.length === 1 ? utils.escapeRegex(chars[0]) : `[${chars.map((ch) => utils.escapeRegex(ch)).join("")}]`;
+      return `${source}*`;
+    };
+    var getStarExtglobSequenceChars = (pattern) => {
       let index = 0;
       const chars = [];
       while (index < pattern.length) {
@@ -837,8 +841,7 @@ var require_parse = __commonJS({
       if (chars.length < 1) {
         return;
       }
-      const source = chars.length === 1 ? utils.escapeRegex(chars[0]) : `[${chars.map((ch) => utils.escapeRegex(ch)).join("")}]`;
-      return `${source}*`;
+      return chars;
     };
     var repeatedExtglobRecursion = (pattern) => {
       let depth = 0;
@@ -862,14 +865,28 @@ var require_parse = __commonJS({
           return { risky: true };
         }
       }
+      const safeChars = [];
+      let sawStarSequence = false;
+      let combinable = true;
       for (const branch of branches) {
-        const safeOutput = getStarExtglobSequenceOutput(branch);
-        if (safeOutput) {
-          return { risky: true, safeOutput };
+        const chars = getStarExtglobSequenceChars(branch);
+        if (chars) {
+          sawStarSequence = true;
+          safeChars.push(...chars);
+          continue;
         }
+        const literal = normalizeSimpleBranch(branch);
+        if (literal && literal.length === 1) {
+          safeChars.push(literal);
+          continue;
+        }
+        combinable = false;
         if (repeatedExtglobRecursion(branch) > max) {
           return { risky: true };
         }
+      }
+      if (sawStarSequence) {
+        return combinable ? { risky: true, safeOutput: buildCharClassStar([...new Set(safeChars)]) } : { risky: true };
       }
       return { risky: false };
     };
@@ -1720,9 +1737,9 @@ var require_picomatch = __commonJS({
       }
       return { isMatch: Boolean(match2), match: match2, output };
     };
-    picomatch.matchBase = (input, glob, options) => {
+    picomatch.matchBase = (input, glob, options, posix = options && options.windows) => {
       const regex = glob instanceof RegExp ? glob : picomatch.makeRe(glob, options);
-      return regex.test(utils.basename(input));
+      return regex.test(utils.basename(input, { windows: posix }));
     };
     picomatch.isMatch = (str, patterns2, options) => picomatch(patterns2, options)(str);
     picomatch.parse = (pattern, options) => {
@@ -6549,6 +6566,8 @@ var STRINGS_EN = {
   notices: {
     inversionDetectedAndFixed: 'Frontmatter Date Manager: out-of-order dates were detected and fixed. Use "Find out-of-order dates" in settings to review.',
     timestampsUpdated: "Timestamps updated.",
+    timestampsAlreadyCurrent: "Timestamps are already up to date.",
+    timestampsUpdateScheduled: "Timestamps will update shortly.",
     fileIgnored: "File is ignored by plugin settings.",
     failedToUpdateWithReason: "Failed to update timestamps: {reason}",
     failedToUpdate: "Failed to update timestamps.",
@@ -6958,6 +6977,8 @@ var STRINGS_RU = {
   notices: {
     inversionDetectedAndFixed: 'Frontmatter Date Manager: \u043E\u0431\u043D\u0430\u0440\u0443\u0436\u0435\u043D\u044B \u0438 \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u044B \u0434\u0430\u0442\u044B \u0432 \u043D\u0435\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E\u043C \u043F\u043E\u0440\u044F\u0434\u043A\u0435. \u041E\u0442\u043A\u0440\u043E\u0439\u0442\u0435 "\u041D\u0430\u0439\u0442\u0438 \u0434\u0430\u0442\u044B \u0432 \u043D\u0435\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E\u043C \u043F\u043E\u0440\u044F\u0434\u043A\u0435" \u0432 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u0445 \u0434\u043B\u044F \u043F\u0440\u043E\u0432\u0435\u0440\u043A\u0438.',
     timestampsUpdated: "\u0414\u0430\u0442\u044B \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u044B.",
+    timestampsAlreadyCurrent: "\u0414\u0430\u0442\u044B \u0443\u0436\u0435 \u0430\u043A\u0442\u0443\u0430\u043B\u044C\u043D\u044B.",
+    timestampsUpdateScheduled: "\u0414\u0430\u0442\u044B \u0441\u043A\u043E\u0440\u043E \u043E\u0431\u043D\u043E\u0432\u044F\u0442\u0441\u044F.",
     fileIgnored: "\u0424\u0430\u0439\u043B \u0438\u0441\u043A\u043B\u044E\u0447\u0451\u043D \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u043C\u0438 \u043F\u043B\u0430\u0433\u0438\u043D\u0430.",
     failedToUpdateWithReason: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0434\u0430\u0442\u044B: {reason}",
     failedToUpdate: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043E\u0431\u043D\u043E\u0432\u0438\u0442\u044C \u0434\u0430\u0442\u044B.",
@@ -7367,6 +7388,8 @@ var STRINGS_AR = {
   notices: {
     inversionDetectedAndFixed: 'Frontmatter Date Manager: \u062A\u0645 \u0627\u0643\u062A\u0634\u0627\u0641 \u062A\u0648\u0627\u0631\u064A\u062E \u0628\u062A\u0631\u062A\u064A\u0628 \u063A\u064A\u0631 \u0635\u062D\u064A\u062D \u0648\u0625\u0635\u0644\u0627\u062D\u0647\u0627. \u0627\u0633\u062A\u062E\u062F\u0645 "\u0627\u0644\u0628\u062D\u062B \u0639\u0646 \u0627\u0644\u062A\u0648\u0627\u0631\u064A\u062E \u0630\u0627\u062A \u0627\u0644\u062A\u0631\u062A\u064A\u0628 \u063A\u064A\u0631 \u0627\u0644\u0635\u062D\u064A\u062D" \u0641\u064A \u0627\u0644\u0625\u0639\u062F\u0627\u062F\u0627\u062A \u0644\u0644\u0645\u0631\u0627\u062C\u0639\u0629.',
     timestampsUpdated: "\u062A\u0645 \u062A\u062D\u062F\u064A\u062B \u0627\u0644\u062A\u0648\u0627\u0631\u064A\u062E.",
+    timestampsAlreadyCurrent: "Timestamps are already up to date.",
+    timestampsUpdateScheduled: "Timestamps will update shortly.",
     fileIgnored: "\u062A\u0645 \u062A\u062C\u0627\u0647\u0644 \u0627\u0644\u0645\u0644\u0641 \u0628\u0646\u0627\u0621\u064B \u0639\u0644\u0649 \u0625\u0639\u062F\u0627\u062F\u0627\u062A \u0627\u0644\u0625\u0636\u0627\u0641\u0629.",
     failedToUpdateWithReason: "\u062A\u0639\u0630\u0651\u0631 \u062A\u062D\u062F\u064A\u062B \u0627\u0644\u062A\u0648\u0627\u0631\u064A\u062E: {reason}",
     failedToUpdate: "\u062A\u0639\u0630\u0651\u0631 \u062A\u062D\u062F\u064A\u062B \u0627\u0644\u062A\u0648\u0627\u0631\u064A\u062E.",
@@ -7776,6 +7799,8 @@ var STRINGS_DE = {
   notices: {
     inversionDetectedAndFixed: 'Frontmatter Date Manager: Daten in falscher Reihenfolge wurden erkannt und korrigiert. Verwenden Sie "Daten in falscher Reihenfolge finden" in den Einstellungen, um sie zu pr\xFCfen.',
     timestampsUpdated: "Daten aktualisiert.",
+    timestampsAlreadyCurrent: "Timestamps are already up to date.",
+    timestampsUpdateScheduled: "Timestamps will update shortly.",
     fileIgnored: "Datei wird durch die Plugin-Einstellungen ignoriert.",
     failedToUpdateWithReason: "Daten konnten nicht aktualisiert werden: {reason}",
     failedToUpdate: "Daten konnten nicht aktualisiert werden.",
@@ -8185,6 +8210,8 @@ var STRINGS_ES = {
   notices: {
     inversionDetectedAndFixed: 'Frontmatter Date Manager: se detectaron y corrigieron fechas en orden incorrecto. Usa "Buscar fechas en orden incorrecto" en los ajustes para revisarlas.',
     timestampsUpdated: "Fechas actualizadas.",
+    timestampsAlreadyCurrent: "Timestamps are already up to date.",
+    timestampsUpdateScheduled: "Timestamps will update shortly.",
     fileIgnored: "El archivo est\xE1 ignorado por los ajustes del plugin.",
     failedToUpdateWithReason: "No se pudieron actualizar las fechas: {reason}",
     failedToUpdate: "No se pudieron actualizar las fechas.",
@@ -8594,6 +8621,8 @@ var STRINGS_FA = {
   notices: {
     inversionDetectedAndFixed: "Frontmatter Date Manager: \u062A\u0627\u0631\u06CC\u062E\u200C\u0647\u0627\u06CC \u0646\u0627\u0645\u0631\u062A\u0628 \u0634\u0646\u0627\u0633\u0627\u06CC\u06CC \u0648 \u0627\u0635\u0644\u0627\u062D \u0634\u062F\u0646\u062F. \u0628\u0631\u0627\u06CC \u0628\u0631\u0631\u0633\u06CC \u0627\u0632 \xAB\u06CC\u0627\u0641\u062A\u0646 \u062A\u0627\u0631\u06CC\u062E\u200C\u0647\u0627\u06CC \u0646\u0627\u0645\u0631\u062A\u0628\xBB \u062F\u0631 \u062A\u0646\u0638\u06CC\u0645\u0627\u062A \u0627\u0633\u062A\u0641\u0627\u062F\u0647 \u06A9\u0646\u06CC\u062F.",
     timestampsUpdated: "\u062A\u0627\u0631\u06CC\u062E\u200C\u0647\u0627 \u0628\u0647\u200C\u0631\u0648\u0632\u0631\u0633\u0627\u0646\u06CC \u0634\u062F\u0646\u062F.",
+    timestampsAlreadyCurrent: "Timestamps are already up to date.",
+    timestampsUpdateScheduled: "Timestamps will update shortly.",
     fileIgnored: "\u0627\u06CC\u0646 \u067E\u0631\u0648\u0646\u062F\u0647 \u0628\u0631 \u0627\u0633\u0627\u0633 \u062A\u0646\u0638\u06CC\u0645\u0627\u062A \u0627\u0641\u0632\u0648\u0646\u0647 \u0646\u0627\u062F\u06CC\u062F\u0647 \u06AF\u0631\u0641\u062A\u0647 \u0634\u062F\u0647 \u0627\u0633\u062A.",
     failedToUpdateWithReason: "\u0628\u0647\u200C\u0631\u0648\u0632\u0631\u0633\u0627\u0646\u06CC \u062A\u0627\u0631\u06CC\u062E\u200C\u0647\u0627 \u0646\u0627\u0645\u0648\u0641\u0642 \u0628\u0648\u062F: {reason}",
     failedToUpdate: "\u0628\u0647\u200C\u0631\u0648\u0632\u0631\u0633\u0627\u0646\u06CC \u062A\u0627\u0631\u06CC\u062E\u200C\u0647\u0627 \u0646\u0627\u0645\u0648\u0641\u0642 \u0628\u0648\u062F.",
@@ -9003,6 +9032,8 @@ var STRINGS_FR = {
   notices: {
     inversionDetectedAndFixed: 'Frontmatter Date Manager : des dates dans le d\xE9sordre ont \xE9t\xE9 d\xE9tect\xE9es et corrig\xE9es. Utilisez "Trouver les dates dans le d\xE9sordre" dans les param\xE8tres pour v\xE9rifier.',
     timestampsUpdated: "Dates mises \xE0 jour.",
+    timestampsAlreadyCurrent: "Timestamps are already up to date.",
+    timestampsUpdateScheduled: "Timestamps will update shortly.",
     fileIgnored: "Le fichier est ignor\xE9 par les param\xE8tres du module.",
     failedToUpdateWithReason: "\xC9chec de la mise \xE0 jour des dates : {reason}",
     failedToUpdate: "\xC9chec de la mise \xE0 jour des dates.",
@@ -9412,6 +9443,8 @@ var STRINGS_ID = {
   notices: {
     inversionDetectedAndFixed: 'Frontmatter Date Manager: tanggal yang tidak urut terdeteksi dan diperbaiki. Gunakan "Cari tanggal yang tidak urut" di pengaturan untuk meninjau.',
     timestampsUpdated: "Tanggal diperbarui.",
+    timestampsAlreadyCurrent: "Timestamps are already up to date.",
+    timestampsUpdateScheduled: "Timestamps will update shortly.",
     fileIgnored: "Berkas diabaikan oleh pengaturan plugin.",
     failedToUpdateWithReason: "Gagal memperbarui tanggal: {reason}",
     failedToUpdate: "Gagal memperbarui tanggal.",
@@ -9821,6 +9854,8 @@ var STRINGS_IT = {
   notices: {
     inversionDetectedAndFixed: 'Frontmatter Date Manager: sono state rilevate e corrette date in ordine errato. Usa "Trova date in ordine errato" nelle impostazioni per verificarle.',
     timestampsUpdated: "Date aggiornate.",
+    timestampsAlreadyCurrent: "Timestamps are already up to date.",
+    timestampsUpdateScheduled: "Timestamps will update shortly.",
     fileIgnored: "Il file viene ignorato dalle impostazioni del plugin.",
     failedToUpdateWithReason: "Impossibile aggiornare le date: {reason}",
     failedToUpdate: "Impossibile aggiornare le date.",
@@ -10230,6 +10265,8 @@ var STRINGS_JA = {
   notices: {
     inversionDetectedAndFixed: "Frontmatter Date Manager: \u9806\u5E8F\u304C\u9006\u306E\u65E5\u4ED8\u3092\u691C\u51FA\u3057\u3066\u4FEE\u6B63\u3057\u307E\u3057\u305F\u3002\u8A2D\u5B9A\u306E\u300C\u9806\u5E8F\u304C\u9006\u306E\u65E5\u4ED8\u3092\u691C\u7D22\u300D\u3067\u78BA\u8A8D\u3057\u3066\u304F\u3060\u3055\u3044\u3002",
     timestampsUpdated: "\u65E5\u4ED8\u3092\u66F4\u65B0\u3057\u307E\u3057\u305F\u3002",
+    timestampsAlreadyCurrent: "Timestamps are already up to date.",
+    timestampsUpdateScheduled: "Timestamps will update shortly.",
     fileIgnored: "\u3053\u306E\u30D5\u30A1\u30A4\u30EB\u306F\u30D7\u30E9\u30B0\u30A4\u30F3\u306E\u8A2D\u5B9A\u306B\u3088\u308A\u9664\u5916\u3055\u308C\u3066\u3044\u307E\u3059\u3002",
     failedToUpdateWithReason: "\u65E5\u4ED8\u306E\u66F4\u65B0\u306B\u5931\u6557\u3057\u307E\u3057\u305F: {reason}",
     failedToUpdate: "\u65E5\u4ED8\u306E\u66F4\u65B0\u306B\u5931\u6557\u3057\u307E\u3057\u305F\u3002",
@@ -10639,6 +10676,8 @@ var STRINGS_KO = {
   notices: {
     inversionDetectedAndFixed: 'Frontmatter Date Manager: \uC21C\uC11C\uAC00 \uC798\uBABB\uB41C \uB0A0\uC9DC\uB97C \uAC10\uC9C0\uD558\uC5EC \uC218\uC815\uD588\uC2B5\uB2C8\uB2E4. \uD655\uC778\uD558\uB824\uBA74 \uC124\uC815\uC5D0\uC11C "\uC21C\uC11C\uAC00 \uC798\uBABB\uB41C \uB0A0\uC9DC \uCC3E\uAE30"\uB97C \uC0AC\uC6A9\uD558\uC138\uC694.',
     timestampsUpdated: "\uB0A0\uC9DC\uAC00 \uC5C5\uB370\uC774\uD2B8\uB418\uC5C8\uC2B5\uB2C8\uB2E4.",
+    timestampsAlreadyCurrent: "Timestamps are already up to date.",
+    timestampsUpdateScheduled: "Timestamps will update shortly.",
     fileIgnored: "\uD50C\uB7EC\uADF8\uC778 \uC124\uC815\uC5D0 \uC758\uD574 \uBB34\uC2DC\uB418\uB294 \uD30C\uC77C\uC785\uB2C8\uB2E4.",
     failedToUpdateWithReason: "\uB0A0\uC9DC\uB97C \uC5C5\uB370\uC774\uD2B8\uD558\uC9C0 \uBABB\uD588\uC2B5\uB2C8\uB2E4: {reason}",
     failedToUpdate: "\uB0A0\uC9DC\uB97C \uC5C5\uB370\uC774\uD2B8\uD558\uC9C0 \uBABB\uD588\uC2B5\uB2C8\uB2E4.",
@@ -11048,6 +11087,8 @@ var STRINGS_NL = {
   notices: {
     inversionDetectedAndFixed: 'Frontmatter Date Manager: datums in verkeerde volgorde zijn gevonden en hersteld. Gebruik "Datums in verkeerde volgorde zoeken" in de instellingen om te controleren.',
     timestampsUpdated: "Datums bijgewerkt.",
+    timestampsAlreadyCurrent: "Timestamps are already up to date.",
+    timestampsUpdateScheduled: "Timestamps will update shortly.",
     fileIgnored: "Bestand wordt genegeerd door de plug-in-instellingen.",
     failedToUpdateWithReason: "Datums bijwerken mislukt: {reason}",
     failedToUpdate: "Datums bijwerken mislukt.",
@@ -11457,6 +11498,8 @@ var STRINGS_PL = {
   notices: {
     inversionDetectedAndFixed: 'Frontmatter Date Manager: wykryto i poprawiono daty w z\u0142ej kolejno\u015Bci. Otw\xF3rz "Znajd\u017A daty w z\u0142ej kolejno\u015Bci" w ustawieniach, aby je przejrze\u0107.',
     timestampsUpdated: "Daty zaktualizowane.",
+    timestampsAlreadyCurrent: "Timestamps are already up to date.",
+    timestampsUpdateScheduled: "Timestamps will update shortly.",
     fileIgnored: "Plik jest pomijany przez ustawienia wtyczki.",
     failedToUpdateWithReason: "Nie uda\u0142o si\u0119 zaktualizowa\u0107 dat: {reason}",
     failedToUpdate: "Nie uda\u0142o si\u0119 zaktualizowa\u0107 dat.",
@@ -11866,6 +11909,8 @@ var STRINGS_PT = {
   notices: {
     inversionDetectedAndFixed: 'Frontmatter Date Manager: foram detetadas e corrigidas datas fora de ordem. Use "Encontrar datas fora de ordem" nas defini\xE7\xF5es para rever.',
     timestampsUpdated: "Datas atualizadas.",
+    timestampsAlreadyCurrent: "Timestamps are already up to date.",
+    timestampsUpdateScheduled: "Timestamps will update shortly.",
     fileIgnored: "O ficheiro \xE9 ignorado pelas defini\xE7\xF5es do plugin.",
     failedToUpdateWithReason: "Falha ao atualizar as datas: {reason}",
     failedToUpdate: "Falha ao atualizar as datas.",
@@ -12275,6 +12320,8 @@ var STRINGS_PT_BR = {
   notices: {
     inversionDetectedAndFixed: 'Frontmatter Date Manager: foram detectadas e corrigidas datas fora de ordem. Use "Encontrar datas fora de ordem" nas configura\xE7\xF5es para revisar.',
     timestampsUpdated: "Datas atualizadas.",
+    timestampsAlreadyCurrent: "Timestamps are already up to date.",
+    timestampsUpdateScheduled: "Timestamps will update shortly.",
     fileIgnored: "O arquivo \xE9 ignorado pelas configura\xE7\xF5es do plugin.",
     failedToUpdateWithReason: "Falha ao atualizar as datas: {reason}",
     failedToUpdate: "Falha ao atualizar as datas.",
@@ -12684,6 +12731,8 @@ var STRINGS_TH = {
   notices: {
     inversionDetectedAndFixed: 'Frontmatter Date Manager: \u0E15\u0E23\u0E27\u0E08\u0E1E\u0E1A\u0E41\u0E25\u0E30\u0E41\u0E01\u0E49\u0E44\u0E02\u0E27\u0E31\u0E19\u0E17\u0E35\u0E48\u0E17\u0E35\u0E48\u0E40\u0E23\u0E35\u0E22\u0E07\u0E1C\u0E34\u0E14\u0E25\u0E33\u0E14\u0E31\u0E1A\u0E41\u0E25\u0E49\u0E27 \u0E43\u0E0A\u0E49 "\u0E04\u0E49\u0E19\u0E2B\u0E32\u0E27\u0E31\u0E19\u0E17\u0E35\u0E48\u0E17\u0E35\u0E48\u0E40\u0E23\u0E35\u0E22\u0E07\u0E1C\u0E34\u0E14\u0E25\u0E33\u0E14\u0E31\u0E1A" \u0E43\u0E19\u0E01\u0E32\u0E23\u0E15\u0E31\u0E49\u0E07\u0E04\u0E48\u0E32\u0E40\u0E1E\u0E37\u0E48\u0E2D\u0E15\u0E23\u0E27\u0E08\u0E2A\u0E2D\u0E1A',
     timestampsUpdated: "\u0E2D\u0E31\u0E1B\u0E40\u0E14\u0E15\u0E27\u0E31\u0E19\u0E17\u0E35\u0E48\u0E41\u0E25\u0E49\u0E27",
+    timestampsAlreadyCurrent: "Timestamps are already up to date.",
+    timestampsUpdateScheduled: "Timestamps will update shortly.",
     fileIgnored: "\u0E44\u0E1F\u0E25\u0E4C\u0E16\u0E39\u0E01\u0E02\u0E49\u0E32\u0E21\u0E15\u0E32\u0E21\u0E01\u0E32\u0E23\u0E15\u0E31\u0E49\u0E07\u0E04\u0E48\u0E32\u0E1B\u0E25\u0E31\u0E4A\u0E01\u0E2D\u0E34\u0E19",
     failedToUpdateWithReason: "\u0E2D\u0E31\u0E1B\u0E40\u0E14\u0E15\u0E27\u0E31\u0E19\u0E17\u0E35\u0E48\u0E44\u0E21\u0E48\u0E2A\u0E33\u0E40\u0E23\u0E47\u0E08: {reason}",
     failedToUpdate: "\u0E2D\u0E31\u0E1B\u0E40\u0E14\u0E15\u0E27\u0E31\u0E19\u0E17\u0E35\u0E48\u0E44\u0E21\u0E48\u0E2A\u0E33\u0E40\u0E23\u0E47\u0E08",
@@ -13093,6 +13142,8 @@ var STRINGS_TR = {
   notices: {
     inversionDetectedAndFixed: 'Frontmatter Date Manager: s\u0131ralamas\u0131 yanl\u0131\u015F tarihler bulundu ve d\xFCzeltildi. \u0130ncelemek i\xE7in ayarlardaki "S\u0131ralamas\u0131 yanl\u0131\u015F tarihleri bul" se\xE7ene\u011Fini kullan\u0131n.',
     timestampsUpdated: "Tarihler g\xFCncellendi.",
+    timestampsAlreadyCurrent: "Timestamps are already up to date.",
+    timestampsUpdateScheduled: "Timestamps will update shortly.",
     fileIgnored: "Dosya, eklenti ayarlar\u0131nca yok say\u0131l\u0131yor.",
     failedToUpdateWithReason: "Tarihler g\xFCncellenemedi: {reason}",
     failedToUpdate: "Tarihler g\xFCncellenemedi.",
@@ -13502,6 +13553,8 @@ var STRINGS_UK = {
   notices: {
     inversionDetectedAndFixed: 'Frontmatter Date Manager: \u0432\u0438\u044F\u0432\u043B\u0435\u043D\u043E \u0442\u0430 \u0432\u0438\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0434\u0430\u0442\u0438 \u0432 \u043D\u0435\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E\u043C\u0443 \u043F\u043E\u0440\u044F\u0434\u043A\u0443. \u0412\u0456\u0434\u043A\u0440\u0438\u0439\u0442\u0435 "\u0417\u043D\u0430\u0439\u0442\u0438 \u0434\u0430\u0442\u0438 \u0432 \u043D\u0435\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E\u043C\u0443 \u043F\u043E\u0440\u044F\u0434\u043A\u0443" \u0432 \u043D\u0430\u043B\u0430\u0448\u0442\u0443\u0432\u0430\u043D\u043D\u044F\u0445 \u0434\u043B\u044F \u043F\u0435\u0440\u0435\u0432\u0456\u0440\u043A\u0438.',
     timestampsUpdated: "\u0414\u0430\u0442\u0438 \u043E\u043D\u043E\u0432\u043B\u0435\u043D\u043E.",
+    timestampsAlreadyCurrent: "Timestamps are already up to date.",
+    timestampsUpdateScheduled: "Timestamps will update shortly.",
     fileIgnored: "\u0424\u0430\u0439\u043B \u0432\u0438\u043A\u043B\u044E\u0447\u0435\u043D\u043E \u043D\u0430\u043B\u0430\u0448\u0442\u0443\u0432\u0430\u043D\u043D\u044F\u043C\u0438 \u043F\u043B\u0430\u0433\u0456\u043D\u0430.",
     failedToUpdateWithReason: "\u041D\u0435 \u0432\u0434\u0430\u043B\u043E\u0441\u044F \u043E\u043D\u043E\u0432\u0438\u0442\u0438 \u0434\u0430\u0442\u0438: {reason}",
     failedToUpdate: "\u041D\u0435 \u0432\u0434\u0430\u043B\u043E\u0441\u044F \u043E\u043D\u043E\u0432\u0438\u0442\u0438 \u0434\u0430\u0442\u0438.",
@@ -13911,6 +13964,8 @@ var STRINGS_VI = {
   notices: {
     inversionDetectedAndFixed: 'Frontmatter Date Manager: \u0111\xE3 ph\xE1t hi\u1EC7n v\xE0 s\u1EEDa c\xE1c ng\xE0y sai th\u1EE9 t\u1EF1. D\xF9ng "T\xECm c\xE1c ng\xE0y sai th\u1EE9 t\u1EF1" trong c\xE0i \u0111\u1EB7t \u0111\u1EC3 xem l\u1EA1i.',
     timestampsUpdated: "\u0110\xE3 c\u1EADp nh\u1EADt ng\xE0y.",
+    timestampsAlreadyCurrent: "Timestamps are already up to date.",
+    timestampsUpdateScheduled: "Timestamps will update shortly.",
     fileIgnored: "T\u1EC7p b\u1ECB b\u1ECF qua b\u1EDFi c\xE0i \u0111\u1EB7t c\u1EE7a plugin.",
     failedToUpdateWithReason: "Kh\xF4ng th\u1EC3 c\u1EADp nh\u1EADt ng\xE0y: {reason}",
     failedToUpdate: "Kh\xF4ng th\u1EC3 c\u1EADp nh\u1EADt ng\xE0y.",
@@ -14320,6 +14375,8 @@ var STRINGS_ZH_CN = {
   notices: {
     inversionDetectedAndFixed: "Frontmatter Date Manager\uFF1A\u68C0\u6D4B\u5230\u5E76\u5DF2\u4FEE\u590D\u987A\u5E8F\u9519\u8BEF\u7684\u65E5\u671F\u3002\u8BF7\u5728\u8BBE\u7F6E\u4E2D\u4F7F\u7528\u201C\u67E5\u627E\u987A\u5E8F\u9519\u8BEF\u7684\u65E5\u671F\u201D\u8FDB\u884C\u6838\u67E5\u3002",
     timestampsUpdated: "\u65E5\u671F\u5DF2\u66F4\u65B0\u3002",
+    timestampsAlreadyCurrent: "Timestamps are already up to date.",
+    timestampsUpdateScheduled: "Timestamps will update shortly.",
     fileIgnored: "\u8BE5\u6587\u4EF6\u5DF2\u88AB\u63D2\u4EF6\u8BBE\u7F6E\u5FFD\u7565\u3002",
     failedToUpdateWithReason: "\u66F4\u65B0\u65E5\u671F\u5931\u8D25\uFF1A{reason}",
     failedToUpdate: "\u66F4\u65B0\u65E5\u671F\u5931\u8D25\u3002",
@@ -14729,6 +14786,8 @@ var STRINGS_ZH_TW = {
   notices: {
     inversionDetectedAndFixed: "Frontmatter Date Manager\uFF1A\u5075\u6E2C\u5230\u4E26\u5DF2\u4FEE\u6B63\u9806\u5E8F\u932F\u8AA4\u7684\u65E5\u671F\u3002\u8ACB\u5728\u8A2D\u5B9A\u4E2D\u4F7F\u7528\u300C\u5C0B\u627E\u9806\u5E8F\u932F\u8AA4\u7684\u65E5\u671F\u300D\u9032\u884C\u6AA2\u67E5\u3002",
     timestampsUpdated: "\u65E5\u671F\u5DF2\u66F4\u65B0\u3002",
+    timestampsAlreadyCurrent: "Timestamps are already up to date.",
+    timestampsUpdateScheduled: "Timestamps will update shortly.",
     fileIgnored: "\u6B64\u6A94\u6848\u5DF2\u88AB\u5916\u639B\u8A2D\u5B9A\u7565\u904E\u3002",
     failedToUpdateWithReason: "\u66F4\u65B0\u65E5\u671F\u5931\u6557\uFF1A{reason}",
     failedToUpdate: "\u66F4\u65B0\u65E5\u671F\u5931\u6557\u3002",
@@ -15384,7 +15443,7 @@ function renderProgress(parent, max) {
   });
   const bar = wrapper.createEl("progress");
   bar.setAttr("max", max);
-  const counter = wrapper.createEl("span");
+  const counter = wrapper.createSpan();
   return {
     update(count) {
       bar.setAttr("value", count);
@@ -17104,7 +17163,7 @@ var FrontmatterDateManagerSettingsTab = class extends import_obsidian11.PluginSe
     var _a, _b, _c;
     const { containerEl } = this;
     containerEl.empty();
-    const descEl = containerEl.createEl("div", {
+    const descEl = containerEl.createDiv({
       cls: "frontmatter-date-manager-plugin-description"
     });
     descEl.createEl("p", {
@@ -17125,7 +17184,7 @@ var FrontmatterDateManagerSettingsTab = class extends import_obsidian11.PluginSe
     const modifiedEnabled = (_a = this.plugin.settings.enableModifiedTime) != null ? _a : true;
     const viewedEnabled = (_b = this.plugin.settings.enableLastViewed) != null ? _b : false;
     if (!this.plugin.settings.enableCreateTime && !modifiedEnabled && !viewedEnabled) {
-      containerEl.createEl("div", {
+      containerEl.createDiv({
         cls: "frontmatter-date-manager-hint-message",
         text: strings.settings.dates.enableNoneHint
       });
@@ -17401,15 +17460,15 @@ var FrontmatterDateManagerSettingsTab = class extends import_obsidian11.PluginSe
     });
     const setting = new import_obsidian11.Setting(this.containerEl).setName(strings.settings.filterRules.name).setDesc(descr);
     setting.settingEl.addClass("frontmatter-date-manager-filter-setting");
-    const warnEl = this.containerEl.createEl("div", {
+    const warnEl = this.containerEl.createDiv({
       cls: "frontmatter-date-manager-filter-warn",
       text: strings.settings.filterRules.noRulesWarning
     });
-    const errorsEl = this.containerEl.createEl("div", {
+    const errorsEl = this.containerEl.createDiv({
       cls: "frontmatter-date-manager-filter-errors"
     });
     this.addFilterRulesReference();
-    const previewEl = this.containerEl.createEl("div", {
+    const previewEl = this.containerEl.createDiv({
       cls: "frontmatter-date-manager-filter-preview"
     });
     const currentValue = (_a = this.plugin.settings.filterRules) != null ? _a : "";
@@ -17420,7 +17479,7 @@ var FrontmatterDateManagerSettingsTab = class extends import_obsidian11.PluginSe
       if (trimmed.length > 0) {
         const { errors } = parseFilterRules(trimmed);
         for (const err of errors) {
-          errorsEl.createEl("div", {
+          errorsEl.createDiv({
             text: format2(strings.settings.filterRules.parseError, {
               lineNumber: err.lineNumber,
               message: err.message,
@@ -17468,7 +17527,7 @@ var FrontmatterDateManagerSettingsTab = class extends import_obsidian11.PluginSe
             tracked.push(file.path);
           }
         }
-        previewEl.createEl("div", {
+        previewEl.createDiv({
           text: format2(strings.settings.filterRules.previewSummary, {
             tracked: tracked.length,
             excluded: excluded.length
@@ -17506,7 +17565,7 @@ var FrontmatterDateManagerSettingsTab = class extends import_obsidian11.PluginSe
       text: strings.settings.filterRules.reference.summary
     });
     const addSection = (title, rows) => {
-      refEl.createEl("div", {
+      refEl.createDiv({
         text: title,
         cls: "frontmatter-date-manager-ref-section-title"
       });
@@ -17856,6 +17915,7 @@ var import_js_sha256 = __toESM(require_sha256());
 
 // src/constants.ts
 var MODIFY_DEBOUNCE_MS = 2e3;
+var FRESHNESS_SEC = 5;
 
 // src/main.ts
 var HASH_CACHE_FILE = "hash-cache.json";
@@ -18015,7 +18075,9 @@ var FrontmatterDateManagerPlugin = class extends import_obsidian12.Plugin {
           if (!checking) {
             this.handleFileChange(file).then((result) => {
               if (result.status === "ok") {
-                new import_obsidian12.Notice(strings.notices.timestampsUpdated);
+                new import_obsidian12.Notice(
+                  result.wrote ? strings.notices.timestampsUpdated : result.deferred ? strings.notices.timestampsUpdateScheduled : strings.notices.timestampsAlreadyCurrent
+                );
               } else if (result.status === "ignored") {
                 new import_obsidian12.Notice(strings.notices.fileIgnored);
               } else {
@@ -18247,6 +18309,38 @@ var FrontmatterDateManagerPlugin = class extends import_obsidian12.Plugin {
     if (dateKeys.includes(key)) return null;
     return key;
   }
+  // True when the file is currently loaded in a Markdown editor leaf (not a
+  // deferred/unloaded leaf). Used to decide whether an automatic frontmatter
+  // write must preserve the file's mtime - see editorSafeWriteOptions.
+  isFileOpenInEditor(file) {
+    return this.app.workspace.getLeavesOfType("markdown").some(
+      (leaf) => {
+        var _a;
+        return leaf.view instanceof import_obsidian12.MarkdownView && ((_a = leaf.view.file) == null ? void 0 : _a.path) === file.path;
+      }
+    );
+  }
+  // Write options for an automatic (single-file) frontmatter write. When the
+  // target note is open in an editor we pin its ctime/mtime so Obsidian does NOT
+  // treat the write as an external change: otherwise it reloads the note into the
+  // editor and the user's cursor, selection, and scroll jump while they are still
+  // typing (the reported "storm"). A note not open in any editor is written with
+  // no options (undefined) - there is no live editor to disturb, so its metadata
+  // (Properties view, Dataview) refreshes immediately, which is preferable.
+  //
+  // The tradeoff for the open note: its `updated`/`viewed` value in the live
+  // Properties view only catches up on the next real edit or reopen (on disk it
+  // is already correct). This intentionally reverses the earlier "always
+  // re-render" choice - stability while typing outranks live-reflecting a
+  // timestamp the user is not looking at.
+  //
+  // Bulk operations must NEVER use this (they write via src/bulk/write.ts):
+  // preserving mtime there leaves the hash cache stale and lets a self-triggered
+  // modify event escaping the bulkRunning window spuriously re-stamp `updated`.
+  editorSafeWriteOptions(file) {
+    if (!this.isFileOpenInEditor(file)) return void 0;
+    return { ctime: file.stat.ctime, mtime: file.stat.mtime };
+  }
   computeFrontmatterUpdates(file) {
     var _a, _b, _c, _d, _e, _f;
     const updatedKey = this.settings.headerUpdated.trim();
@@ -18270,18 +18364,26 @@ var FrontmatterDateManagerPlugin = class extends import_obsidian12.Plugin {
     }
     if (((_b = this.settings.enableModifiedTime) != null ? _b : true) && updatedKey) {
       const existingUpdated = cached == null ? void 0 : cached[updatedKey];
-      const currentMTimeOnFile = existingUpdated ? this.parseDate(existingUpdated) : void 0;
-      if (!existingUpdated || !currentMTimeOnFile) {
-        result.updatedValue = this.formatDate(mTime);
+      const candidate = this.formatDate(mTime);
+      if (!existingUpdated) {
+        result.updatedValue = candidate;
         result.countedEdit = true;
-      } else if (this.shouldUpdateValue(/* @__PURE__ */ new Date(), currentMTimeOnFile)) {
-        result.updatedValue = this.formatDate(mTime);
-        result.countedEdit = true;
+      } else if (candidate !== void 0 && String(candidate) === String(existingUpdated)) {
       } else {
-        const nextUpdate = add(currentMTimeOnFile, {
-          seconds: this.settings.minSecondsBetweenSaves
-        });
-        result.retryAfterMs = Math.max(0, nextUpdate.getTime() - Date.now()) + 200;
+        const currentMTimeOnFile = this.parseDate(existingUpdated);
+        if (!currentMTimeOnFile) {
+          result.updatedValue = candidate;
+          result.countedEdit = true;
+        } else if ((mTime.getTime() - currentMTimeOnFile.getTime()) / 1e3 <= FRESHNESS_SEC) {
+        } else if (this.shouldUpdateValue(/* @__PURE__ */ new Date(), currentMTimeOnFile)) {
+          result.updatedValue = candidate;
+          result.countedEdit = true;
+        } else {
+          const nextUpdate = add(currentMTimeOnFile, {
+            seconds: this.settings.minSecondsBetweenSaves
+          });
+          result.retryAfterMs = Math.max(0, nextUpdate.getTime() - Date.now()) + 200;
+        }
       }
     }
     const strategy = (_c = this.settings.inversionFixStrategy) != null ? _c : "disabled";
@@ -18317,7 +18419,7 @@ var FrontmatterDateManagerPlugin = class extends import_obsidian12.Plugin {
     if (lastMtime !== void 0) {
       this.lastPluginWriteMtime.delete(file.path);
       if (lastMtime === file.stat.mtime) {
-        return { status: "ok" };
+        return { status: "ok", wrote: false };
       }
     }
     const checkResult = await this.shouldFileBeIgnored(file);
@@ -18337,7 +18439,7 @@ var FrontmatterDateManagerPlugin = class extends import_obsidian12.Plugin {
         }, updates.retryAfterMs);
         this.modifyTimers.set(file.path, timer);
       }
-      return { status: "ok" };
+      return { status: "ok", wrote: false, deferred: true };
     }
     const hasChanges = updates.createdValue !== void 0 || updates.updatedValue !== void 0;
     if (!hasChanges) {
@@ -18345,7 +18447,7 @@ var FrontmatterDateManagerPlugin = class extends import_obsidian12.Plugin {
       if (checkResult.fileContent) {
         await this.populateCacheForFile(file, checkResult.fileContent);
       }
-      return { status: "ok" };
+      return { status: "ok", wrote: false };
     }
     try {
       await this.app.fileManager.processFrontMatter(
@@ -18363,7 +18465,10 @@ var FrontmatterDateManagerPlugin = class extends import_obsidian12.Plugin {
           if (counterKey && updates.countedEdit === true && updates.updatedValue !== void 0) {
             frontmatter[counterKey] = coerceCount(frontmatter[counterKey]) + 1;
           }
-        }
+        },
+        // Preserve mtime when the note is open in an editor so the write does not
+        // reload it and jump the user's cursor/scroll while they type.
+        this.editorSafeWriteOptions(file)
       );
       this.lastPluginWriteMtime.set(file.path, file.stat.mtime);
       await this.populateCacheForFile(file);
@@ -18398,7 +18503,8 @@ var FrontmatterDateManagerPlugin = class extends import_obsidian12.Plugin {
       };
     }
     return {
-      status: "ok"
+      status: "ok",
+      wrote: true
     };
   }
   // processingFiles Set prevents concurrent processFrontMatter on the same file.
@@ -18454,11 +18560,18 @@ var FrontmatterDateManagerPlugin = class extends import_obsidian12.Plugin {
       const now = /* @__PURE__ */ new Date();
       const formattedNow = this.formatDate(now);
       if (formattedNow === void 0) return;
+      if (existingViewed != null && String(formattedNow) === String(existingViewed)) {
+        return;
+      }
       await this.app.fileManager.processFrontMatter(
         file,
         (frontmatter) => {
           frontmatter[viewedKey] = formattedNow;
-        }
+        },
+        // The just-opened note is loaded in an editor, so pin its mtime: merely
+        // viewing a file must not reload the editor nor falsely bump its
+        // modified time.
+        this.editorSafeWriteOptions(file)
       );
       this.lastPluginWriteMtime.set(file.path, file.stat.mtime);
       if (this.settings.enableContentHashCheck) {

@@ -67,7 +67,7 @@
 
 - `obsidian-linter` — **активен**: форматирует `.md` при сохранении и при изменении файла на диске (`lintOnSave`/`lintOnFileChange`, локаль `ru`). Правила формата, под которые надо писать, — в `.claude/rules/markdown.md`. При **закрытом** Obsidian линтер не работает — формат держит сам Claude.
 - Core-плагины `bases` (`.base` — табличные/карточные представления) и `canvas` (`.canvas`) включены.
-- Активно: `omnisearch` (полнотекстовый поиск), `notebook-navigator`, `table-editor-obsidian`, `obsidian-heading-shifter`.
+- Активно: `omnisearch` (полнотекстовый поиск), `notebook-navigator`, `table-editor-obsidian`, `obsidian-heading-shifter`, `mehrmaid` (Markdown — ссылки, форматирование, формулы — внутри узлов Mermaid-диаграмм в блоке ```` ```mehrmaid ````).
 
 ## Репозитории внешних плагинов
 
@@ -77,6 +77,7 @@
 - `consistent-attachments-and-links` — Consistent Attachments and Links — https://github.com/dy-sh/obsidian-consistent-attachments-and-links
 - `data-files-editor` — Data Files Editor — https://github.com/ZukTol/obsidian-data-files-editor
 - `frontmatter-date-manager` — Frontmatter Date Manager — https://github.com/SmetDenis/obsidian-frontmatter-date-manager
+- `mehrmaid` — Mehrmaid — https://github.com/huterguier/obsidian-mehrmaid
 - `notebook-navigator` — Notebook Navigator — https://github.com/johansan/notebook-navigator
 - `obsidian-git` — Git — https://github.com/Vinzent03/obsidian-git
 - `obsidian-heading-shifter` — Heading Shifter — https://github.com/k4a-l/obsidian-heading-shifter

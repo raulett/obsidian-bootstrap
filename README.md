@@ -155,6 +155,7 @@ git push -u origin main
 | **Data Files Editor**                | Редактирование `txt` / `json` / `yaml` / `xml` прямо в Obsidian.                                                                   |
 | **Linter**                           | Форматирование `.md` при сохранении и изменении файла на диске.                                                                    |
 | **Local REST API**                   | REST API к хранилищу; на нём работает MCP-сервер `obsidian` - канал релевантного поиска для AI (omnisearch), пока Obsidian открыт. |
+| **Mehrmaid**                         | Markdown (ссылки, форматирование, формулы) внутри узлов Mermaid-диаграмм - блок кода `mehrmaid` вместо `mermaid`.                  |
 
 ---
 
