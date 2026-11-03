@@ -18,6 +18,10 @@
         {
           "type": "note",
           "path": "CLAUDE.md"
+        },
+        {
+          "type": "note",
+          "path": "Карта — Хранилище.md"
         }
       ],
       "navRainbow": {
@@ -67,7 +71,8 @@
           "transitionStyle": "hue",
           "scope": "root"
         }
-      }
+      },
+      "descendantExcludedFolders": []
     }
   ],
   "vaultProfile": "default",
@@ -144,6 +149,7 @@
       "search": true,
       "reveal": false,
       "descendants": true,
+      "groupExpansion": false,
       "sort": true,
       "appearance": true,
       "newNote": true
@@ -235,6 +241,7 @@
   "showSelectedNavigationPills": false,
   "stickyGroupHeaders": true,
   "showFolderGroupPaths": true,
+  "showGroupHeaderItemCounts": false,
   "showCurrentFolderFilesAtBottom": false,
   "filterPinnedByFolder": false,
   "compactItemHeight": 28,
@@ -271,6 +278,7 @@
   "showFilePreview": true,
   "skipHeadingsInPreview": true,
   "skipCodeBlocksInPreview": true,
+  "skipCalloutsInPreview": false,
   "stripHtmlInPreview": true,
   "stripLatexInPreview": true,
   "previewRows": 2,
@@ -310,11 +318,13 @@
   "calendarEnabled": false,
   "calendarPlacement": "left-sidebar",
   "calendarConfirmBeforeCreate": true,
+  "calendarShowHiddenItems": false,
   "calendarLocale": "ru",
   "calendarWeekendDays": "sat-sun",
   "calendarMonthHeadingFormat": "full",
   "calendarHighlightToday": true,
   "calendarShowFeatureImage": true,
+  "calendarShowTasks": true,
   "calendarMonthHighlights": {},
   "calendarShowWeekNumber": false,
   "calendarShowQuarter": false,
@@ -509,18 +519,17 @@
   },
   "customVaultName": "",
   "pinnedNotes": {},
-  "collapsedPinnedContexts": {},
   "fileIcons": {},
   "fileColors": {},
   "fileBackgroundColors": {},
   "folderIcons": {
     "inbox": "inbox",
-    "knowledge": "brain",
-    "projects": "folder-kanban",
-    "meetings": "users",
     "archive": "archive",
     "templates": "layout-template",
-    "dashboards": "material-icons:dashboard"
+    "dashboards": "material-icons:dashboard",
+    "Знания": "brain",
+    "Проекты": "folder-kanban",
+    "Справочник": "book-open"
   },
   "folderColors": {
     "/": "#3b82f6",
@@ -579,13 +588,13 @@
     "#404040",
     "#404040"
   ],
-  "lastShownVersion": "3.2.2",
+  "lastShownVersion": "3.3.0",
   "rootFolderOrder": [
     "inbox",
     "dashboards",
-    "knowledge",
-    "projects",
-    "meetings",
+    "Знания",
+    "Проекты",
+    "Справочник",
     "archive",
     "templates",
     "_files",

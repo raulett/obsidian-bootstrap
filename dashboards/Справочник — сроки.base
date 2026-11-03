@@ -1,0 +1,90 @@
+filters:
+  and:
+    - file.ext == "md"
+    - not:
+        - file.inFolder("templates")
+    - not:
+        - file.inFolder("archive")
+    - file.name != "README"
+    - file.name != "Карта — Справочник"
+    - or:
+        - file.inFolder("Справочник")
+        - file.hasTag("type/reference")
+    - expires.isTruthy()
+formulas:
+  note: if(title, file.asLink(title), file.asLink(file.name))
+  expires_rel: if(expires, date(expires).relative(), "без срока")
+  days_left: if(expires, (date(expires) - today()).days, "")
+  source_link: if(source, link(source, "Открыть"), "")
+  folder: file.folder
+properties:
+  formula.note:
+    displayName: Материал
+  formula.expires_rel:
+    displayName: Устареет
+  formula.days_left:
+    displayName: Дней осталось
+  formula.source_link:
+    displayName: Источник
+  formula.folder:
+    displayName: Директория
+  expires:
+    displayName: Срок годности
+views:
+  - type: table
+    name: Истекает в ближайший месяц
+    filters:
+      and:
+        - date(expires) >= today()
+        - date(expires) <= today() + "1M"
+    order:
+      - formula.note
+      - expires
+      - formula.days_left
+      - formula.source_link
+      - formula.folder
+    sort:
+      - property: expires
+        direction: ASC
+    summaries:
+      formula.note: Filled
+    columnSize:
+      formula.note: 400
+      formula.days_left: 130
+      formula.source_link: 120
+  - type: table
+    name: Просрочено
+    filters:
+      and:
+        - date(expires) < today()
+    order:
+      - formula.note
+      - expires
+      - formula.expires_rel
+      - formula.folder
+    sort:
+      - property: expires
+        direction: ASC
+    summaries:
+      formula.note: Filled
+    columnSize:
+      formula.note: 400
+      formula.expires_rel: 150
+  - type: table
+    name: Все со сроком
+    order:
+      - formula.note
+      - expires
+      - formula.expires_rel
+      - formula.source_link
+      - formula.folder
+    sort:
+      - property: expires
+        direction: ASC
+    summaries:
+      formula.note: Filled
+      expires: Earliest
+    columnSize:
+      formula.note: 400
+      formula.expires_rel: 150
+      formula.source_link: 120

@@ -1,0 +1,13 @@
+{
+	"nodes":[
+		{"id":"2a9332529a469743","type":"text","text":"Мысль 1","x":-440,"y":-300,"width":250,"height":60},
+		{"id":"4a169f52ec861a93","type":"text","text":"Идея!","x":-20,"y":-180,"width":250,"height":60},
+		{"id":"bfd10485d93244b7","type":"text","text":"Мысль 2","x":-740,"y":-80,"width":250,"height":50},
+		{"id":"714b3b74f629ac0e","x":-40,"y":-630,"width":250,"height":360,"type":"text","text":""}
+	],
+	"edges":[
+		{"id":"71e8c241061749fb","fromNode":"2a9332529a469743","fromSide":"right","toNode":"4a169f52ec861a93","toSide":"left"},
+		{"id":"1abb7260426fd71d","fromNode":"bfd10485d93244b7","fromSide":"right","toNode":"4a169f52ec861a93","toSide":"left"},
+		{"id":"39aa3ca2ca2e4c2e","fromNode":"714b3b74f629ac0e","fromSide":"left","toNode":"2a9332529a469743","toSide":"top"}
+	]
+}

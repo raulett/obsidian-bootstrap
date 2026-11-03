@@ -1,0 +1,31 @@
+filters:
+  and:
+    - file.inFolder("Проекты/Когда-нибудь")
+    - file.ext == "md"
+    - not:
+        - file.name.startsWith("Карта")
+formulas:
+  note: file.asLink()
+  age: created.relative()
+properties:
+  formula.note:
+    displayName: Замысел
+  formula.age:
+    displayName: Лежит
+  created:
+    displayName: Создано
+views:
+  - type: table
+    name: Замыслы
+    order:
+      - formula.note
+      - formula.age
+      - created
+    sort:
+      - property: created
+        direction: ASC
+    summaries:
+      formula.note: Count
+    columnSize:
+      formula.note: 450
+      formula.age: 150

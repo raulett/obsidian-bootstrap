@@ -23,12 +23,6 @@
 
 Нашёл во внутреннем источнике — **сошлись на него** (укажи документ/файл), не пересказывай по памяти.
 
-## Мост встреч: Calendar ↔ meetings/
-
-- **Подготовка:** `nc_calendar_get_upcoming_events` / `nc_calendar_list_events` → заготовки заметок в `meetings/` (запись в базу файлами — ок, без подтверждения).
-- **После встречи:** вынеси в заметку решения и action items как задачи `- [ ]`. Превращать их в todo/события Nextcloud или карточки Deck — внешняя запись: только по явной просьбе и с подтверждением.
-- Контакты участников — обогащай заметку через `nc_contacts_search_contacts` (чтение).
-
 ## Карта «задача → сервер»
 
 Дополнение к матрице в `tools.md` (доступно, только пока сервер подключён):
@@ -37,7 +31,7 @@
 |--------|---------------|
 | Вопрос по знаниям компании | Outline: `ask_ai_about_documents`, `search_documents` |
 | Найти/прочитать корп-документ | Outline: `read_document`, `read_document_section` |
-| Ближайшие встречи, свободные слоты | Nextcloud: `nc_calendar_get_upcoming_events`, `nc_calendar_find_availability` |
+| Ближайшие события календаря, свободные слоты | Nextcloud: `nc_calendar_get_upcoming_events`, `nc_calendar_find_availability` |
 | Заметки/файлы Nextcloud | Nextcloud: `nc_notes_search_notes`, `nc_webdav_search_files` |
-| Контакты участников | Nextcloud: `nc_contacts_search_contacts` |
+| Контакты людей | Nextcloud: `nc_contacts_search_contacts` |
 | Запись во внешнюю систему | только по явной просьбе + подтверждение |
